@@ -1,0 +1,31 @@
+{
+  "name": "DailyTarget",
+  "type": "object",
+  "properties": {
+    "calories": {
+      "type": "number"
+    },
+    "protein_g": {
+      "type": "number"
+    },
+    "carbs_g": {
+      "type": "number"
+    },
+    "fat_g": {
+      "type": "number"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "calories",
+    "protein_g",
+    "carbs_g",
+    "fat_g"
+  ]
+}

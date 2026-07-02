@@ -1,0 +1,64 @@
+{
+  "name": "Profile",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "number"
+    },
+    "sex": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "height_cm": {
+      "type": "number"
+    },
+    "current_weight_kg": {
+      "type": "number"
+    },
+    "goal_weight_kg": {
+      "type": "number"
+    },
+    "goal_type": {
+      "type": "string",
+      "enum": [
+        "fat_loss",
+        "muscle_gain",
+        "maintenance"
+      ]
+    },
+    "activity_level": {
+      "type": "string",
+      "enum": [
+        "sedentary",
+        "light",
+        "moderate",
+        "active",
+        "very_active"
+      ]
+    },
+    "training_frequency": {
+      "type": "number"
+    },
+    "target_pace": {
+      "type": "string",
+      "enum": [
+        "slow",
+        "moderate",
+        "aggressive"
+      ]
+    },
+    "onboarding_completed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "TrainingLog",
+  "type": "object",
+  "properties": {
+    "training_type": {
+      "type": "string",
+      "enum": [
+        "chest",
+        "back",
+        "legs",
+        "shoulders",
+        "arms",
+        "cardio",
+        "swimming",
+        "rest"
+      ]
+    },
+    "duration_min": {
+      "type": "number"
+    },
+    "steps": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "log_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "training_type",
+    "log_date"
+  ]
+}

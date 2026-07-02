@@ -1,11 +1,26 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import ForgotPassword from '@/pages/ForgotPassword';
+import ResetPassword from '@/pages/ResetPassword';
+import Landing from '@/pages/Landing';
+import Onboarding from '@/pages/Onboarding';
+import Dashboard from '@/pages/Dashboard';
+import FoodAdd from '@/pages/FoodAdd';
+import Weight from '@/pages/Weight';
+import Training from '@/pages/Training';
+import Checkin from '@/pages/Checkin';
+import Coach from '@/pages/Coach';
+import Settings from '@/pages/Settings';
+import AppLayout from '@/components/layout/AppLayout';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -34,6 +49,23 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route element={<AppLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/food/add" element={<FoodAdd />} />
+          <Route path="/weight" element={<Weight />} />
+          <Route path="/training" element={<Training />} />
+          <Route path="/checkin" element={<Checkin />} />
+          <Route path="/coach" element={<Coach />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Route>
       {/* Add your page Route elements here */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>

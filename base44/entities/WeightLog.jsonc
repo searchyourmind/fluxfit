@@ -1,0 +1,17 @@
+{
+  "name": "WeightLog",
+  "type": "object",
+  "properties": {
+    "weight_kg": {
+      "type": "number"
+    },
+    "log_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "weight_kg",
+    "log_date"
+  ]
+}
