@@ -50,6 +50,9 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
+  			protein: 'hsl(var(--protein))',
+  			carbs: 'hsl(var(--carbs))',
+  			fat: 'hsl(var(--fat))',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',

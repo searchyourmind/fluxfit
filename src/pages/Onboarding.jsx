@@ -23,6 +23,12 @@ const PACES = [
   { value: "moderate", label: "适中" },
   { value: "aggressive", label: "激进" },
 ];
+const MACRO_PREFS = [
+  { value: "balanced", label: "均衡" },
+  { value: "higher_carb", label: "高碳水" },
+  { value: "higher_fat", label: "高脂肪" },
+  { value: "high_protein", label: "高蛋白" },
+];
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -38,6 +44,7 @@ export default function Onboarding() {
     activity_level: "moderate",
     training_frequency: "3",
     target_pace: "moderate",
+    macro_preference: "balanced",
   });
 
   const update = (key, value) => setForm((f) => ({ ...f, [key]: value }));
@@ -56,6 +63,7 @@ export default function Onboarding() {
       activity_level: form.activity_level,
       training_frequency: Number(form.training_frequency),
       target_pace: form.target_pace,
+      macro_preference: form.macro_preference,
       onboarding_completed: true,
     };
     await base44.entities.Profile.create(profileData);
@@ -69,27 +77,27 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] px-6 py-10">
+    <div className="min-h-screen bg-[#0E1117] px-6 py-10">
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-bold text-slate-900 mb-1">完善你的资料</h1>
-        <p className="text-slate-500 text-sm mb-8">帮助我们生成你的个性化目标</p>
+        <h1 className="text-2xl font-bold text-white mb-1">完善你的资料</h1>
+        <p className="text-slate-400 text-sm mb-8">帮助我们生成你的个性化目标</p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <Label>姓名</Label>
-            <Input required value={form.name} onChange={(e) => update("name", e.target.value)} className="mt-1.5" />
+            <Label className="text-slate-300">姓名</Label>
+            <Input required value={form.name} onChange={(e) => update("name", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>年龄</Label>
-              <Input required type="number" value={form.age} onChange={(e) => update("age", e.target.value)} className="mt-1.5" />
+              <Label className="text-slate-300">年龄</Label>
+              <Input required type="number" value={form.age} onChange={(e) => update("age", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
             </div>
             <div>
-              <Label>性别</Label>
+              <Label className="text-slate-300">性别</Label>
               <select
                 value={form.sex}
                 onChange={(e) => update("sex", e.target.value)}
-                className="mt-1.5 w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+                className="mt-1.5 w-full h-10 rounded-md border border-white/10 bg-[#171B22] text-white px-3 text-sm"
               >
                 <option value="male">男</option>
                 <option value="female">女</option>
@@ -98,20 +106,20 @@ export default function Onboarding() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>身高 (cm)</Label>
-              <Input required type="number" value={form.height_cm} onChange={(e) => update("height_cm", e.target.value)} className="mt-1.5" />
+              <Label className="text-slate-300">身高 (cm)</Label>
+              <Input required type="number" value={form.height_cm} onChange={(e) => update("height_cm", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
             </div>
             <div>
-              <Label>当前体重 (kg)</Label>
-              <Input required type="number" value={form.current_weight_kg} onChange={(e) => update("current_weight_kg", e.target.value)} className="mt-1.5" />
+              <Label className="text-slate-300">当前体重 (kg)</Label>
+              <Input required type="number" value={form.current_weight_kg} onChange={(e) => update("current_weight_kg", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
             </div>
           </div>
           <div>
-            <Label>目标体重 (kg)</Label>
-            <Input required type="number" value={form.goal_weight_kg} onChange={(e) => update("goal_weight_kg", e.target.value)} className="mt-1.5" />
+            <Label className="text-slate-300">目标体重 (kg)</Label>
+            <Input required type="number" value={form.goal_weight_kg} onChange={(e) => update("goal_weight_kg", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
           </div>
           <div>
-            <Label>目标类型</Label>
+            <Label className="text-slate-300">目标类型</Label>
             <div className="grid grid-cols-3 gap-2 mt-1.5">
               {GOAL_TYPES.map((g) => (
                 <button
@@ -119,7 +127,7 @@ export default function Onboarding() {
                   key={g.value}
                   onClick={() => update("goal_type", g.value)}
                   className={`py-2.5 rounded-xl text-sm font-medium border ${
-                    form.goal_type === g.value ? "bg-emerald-600 text-white border-emerald-600" : "border-slate-200 text-slate-600"
+                    form.goal_type === g.value ? "bg-emerald-500 text-[#0E1117] border-emerald-500" : "border-white/10 text-slate-300"
                   }`}
                 >
                   {g.label}
@@ -128,11 +136,11 @@ export default function Onboarding() {
             </div>
           </div>
           <div>
-            <Label>活动水平</Label>
+            <Label className="text-slate-300">活动水平</Label>
             <select
               value={form.activity_level}
               onChange={(e) => update("activity_level", e.target.value)}
-              className="mt-1.5 w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+              className="mt-1.5 w-full h-10 rounded-md border border-white/10 bg-[#171B22] text-white px-3 text-sm"
             >
               {ACTIVITY_LEVELS.map((a) => (
                 <option key={a.value} value={a.value}>{a.label}</option>
@@ -141,15 +149,15 @@ export default function Onboarding() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>每周训练次数</Label>
-              <Input required type="number" value={form.training_frequency} onChange={(e) => update("training_frequency", e.target.value)} className="mt-1.5" />
+              <Label className="text-slate-300">每周训练次数</Label>
+              <Input required type="number" value={form.training_frequency} onChange={(e) => update("training_frequency", e.target.value)} className="mt-1.5 bg-[#171B22] border-white/10 text-white" />
             </div>
             <div>
-              <Label>目标节奏</Label>
+              <Label className="text-slate-300">目标节奏</Label>
               <select
                 value={form.target_pace}
                 onChange={(e) => update("target_pace", e.target.value)}
-                className="mt-1.5 w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+                className="mt-1.5 w-full h-10 rounded-md border border-white/10 bg-[#171B22] text-white px-3 text-sm"
               >
                 {PACES.map((p) => (
                   <option key={p.value} value={p.value}>{p.label}</option>
@@ -157,7 +165,24 @@ export default function Onboarding() {
               </select>
             </div>
           </div>
-          <Button type="submit" disabled={saving} className="w-full bg-emerald-600 hover:bg-emerald-700 py-6 rounded-2xl text-base">
+          <div>
+            <Label className="text-slate-300">宏量营养偏好</Label>
+            <div className="grid grid-cols-4 gap-2 mt-1.5">
+              {MACRO_PREFS.map((m) => (
+                <button
+                  type="button"
+                  key={m.value}
+                  onClick={() => update("macro_preference", m.value)}
+                  className={`py-2 rounded-xl text-xs font-medium border ${
+                    form.macro_preference === m.value ? "bg-emerald-500 text-[#0E1117] border-emerald-500" : "border-white/10 text-slate-300"
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <Button type="submit" disabled={saving} className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1117] py-6 rounded-2xl text-base">
             {saving ? "生成中..." : "生成我的目标"}
           </Button>
         </form>

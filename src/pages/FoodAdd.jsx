@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { Camera, Type, PenLine, ChevronLeft } from "lucide-react";
+import { Camera, Type, PenLine, ChevronLeft, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import EstimateResult from "@/components/food/EstimateResult";
 
 const MODES = [
-  { key: "photo", label: "拍照上传", icon: Camera },
-  { key: "text", label: "文字描述", icon: Type },
-  { key: "manual", label: "手动输入", icon: PenLine },
+  { key: "photo", label: "拍照识别", icon: Camera },
+  { key: "text", label: "文字记录", icon: Type },
+  { key: "manual", label: "手动添加", icon: PenLine },
+  { key: "saved", label: "常用餐食", icon: BookmarkCheck },
 ];
 
 const EMPTY_ESTIMATE = { description: "", calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0, coaching_note: "", image_url: "" };
@@ -22,6 +23,11 @@ export default function FoodAdd() {
   const [mealType, setMealType] = useState("lunch");
   const [estimate, setEstimate] = useState(null);
   const [textInput, setTextInput] = useState("");
+  const [savedMeals, setSavedMeals] = useState([]);
+
+  const loadSavedMeals = async () => {
+    setSavedMeals(await base44.entities.SavedMeal.list("-created_date", 30));
+  };
 
   const analyzePhoto = async (file) => {
     setAnalyzing(true);
@@ -93,7 +99,7 @@ export default function FoodAdd() {
   };
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0B0F0E]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => (mode || estimate ? (setMode(null), setEstimate(null)) : navigate(-1))}>
           <ChevronLeft className="w-6 h-6 text-white" />
@@ -106,7 +112,7 @@ export default function FoodAdd() {
           {MODES.map(({ key, label, icon: Icon }) => (
             <button
               key={key}
-              onClick={() => setMode(key)}
+              onClick={() => (key === "saved" ? (loadSavedMeals(), setMode(key)) : setMode(key))}
               className="flex items-center gap-4 bg-[#151A19] rounded-2xl p-4 border border-white/5"
             >
               <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
@@ -155,6 +161,31 @@ export default function FoodAdd() {
       )}
 
       {mode === "text" && !estimate && null}
+
+      {mode === "saved" && !estimate && (
+        <div className="space-y-2">
+          {savedMeals.length === 0 && <p className="text-sm text-slate-500 text-center py-10">还没有常用餐食，先在饮食记录里保存一个吧</p>}
+          {savedMeals.map((meal) => (
+            <button
+              key={meal.id}
+              onClick={() => setEstimate({
+                description: meal.name,
+                calories: meal.calories,
+                protein_g: meal.protein_g,
+                carbs_g: meal.carbs_g,
+                fat_g: meal.fat_g,
+                confidence: "high",
+                coaching_note: "",
+                image_url: "",
+              })}
+              className="w-full flex items-center justify-between bg-[#171B22] rounded-2xl p-4 border border-white/5 text-left"
+            >
+              <span className="font-medium text-white text-sm">{meal.name}</span>
+              <span className="text-xs text-slate-500">{Math.round(meal.calories)} kcal</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {mode === "manual" && !estimate && (
         <Button

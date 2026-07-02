@@ -53,7 +53,7 @@ export default function Strategy() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0B0F0E]">
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
         <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
@@ -68,7 +68,7 @@ export default function Strategy() {
         <h1 className="text-lg font-bold text-white">营养策略</h1>
       </div>
 
-      <div className="bg-[#151A19] rounded-3xl p-5 border border-white/5 mb-4">
+      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
         <p className="text-xs text-slate-500 mb-1">当前目标</p>
         <p className="text-xl font-bold text-white mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
         <div className="grid grid-cols-2 gap-4">
@@ -83,7 +83,7 @@ export default function Strategy() {
         </div>
       </div>
 
-      <div className="bg-[#151A19] rounded-3xl p-5 border border-white/5 mb-4">
+      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
         <p className="text-xs text-slate-500 mb-3">宏量营养素目标</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
@@ -102,24 +102,24 @@ export default function Strategy() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">预估消耗</p>
           <p className="text-lg font-bold text-white">
             {expenditure ? `${expenditure.estimated_expenditure} kcal` : "数据不足"}
           </p>
         </div>
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">目标变化速度</p>
           <p className="text-lg font-bold text-white">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
         </div>
       </div>
 
-      <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5 mb-4 flex items-center justify-between">
+      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 mb-4 flex items-center justify-between">
         <span className="text-sm text-slate-300">本周记录依从度</span>
         <span className="text-lg font-bold text-emerald-400">{adherence}%</span>
       </div>
 
-      <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 flex items-center justify-between">
         <span className="text-sm text-slate-300">下次检查时间</span>
         <span className="text-sm font-semibold text-white">{nextCheckin}</span>
       </div>

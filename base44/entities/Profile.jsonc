@@ -53,6 +53,16 @@
         "aggressive"
       ]
     },
+    "macro_preference": {
+      "type": "string",
+      "enum": [
+        "balanced",
+        "higher_carb",
+        "higher_fat",
+        "high_protein"
+      ],
+      "default": "balanced"
+    },
     "onboarding_completed": {
       "type": "boolean",
       "default": false

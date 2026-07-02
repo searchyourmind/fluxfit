@@ -1,0 +1,25 @@
+{
+  "name": "SavedMeal",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "calories": {
+      "type": "number"
+    },
+    "protein_g": {
+      "type": "number"
+    },
+    "carbs_g": {
+      "type": "number"
+    },
+    "fat_g": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "calories"
+  ]
+}

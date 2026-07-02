@@ -4,7 +4,7 @@ export default function FoodLogItem({ log, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`flex items-center gap-3 bg-[#151A19] rounded-2xl p-3 border border-white/5 ${onClick ? "cursor-pointer active:opacity-70" : ""}`}
+      className={`flex items-center gap-3 bg-[#171B22] rounded-2xl p-3 border border-white/5 ${onClick ? "cursor-pointer active:opacity-70" : ""}`}
     >
       {log.image_url ? (
         <img src={log.image_url} alt={log.description} className="w-14 h-14 rounded-xl object-cover shrink-0" />

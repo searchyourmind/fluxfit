@@ -1,38 +1,40 @@
 import { Link } from "react-router-dom";
-import { Camera, TrendingUp, Sparkles, Dumbbell } from "lucide-react";
+import { Camera, TrendingUp, Sparkles, Dumbbell, MessageCircle } from "lucide-react";
 
 const FEATURES = [
-  { icon: Camera, title: "拍照记录饮食", desc: "拍下你的食物，AI 自动识别中式菜、外卖、奶茶、火锅、寿司等" },
-  { icon: Sparkles, title: "AI 智能估算", desc: "自动计算卡路里与蛋白质、碳水、脂肪含量" },
-  { icon: TrendingUp, title: "体重与训练追踪", desc: "记录体重趋势和训练情况，一目了然" },
-  { icon: Dumbbell, title: "每周自动调整", desc: "根据你的真实进度，每周动态调整卡路里目标" },
+  { icon: Camera, title: "拍照识别饮食", desc: "拍下你的食物，AI 自动识别中式菜、外卖、奶茶、火锅、寿司等" },
+  { icon: Sparkles, title: "自动估算碳蛋脂", desc: "自动计算卡路里与蛋白质、碳水、脂肪含量" },
+  { icon: TrendingUp, title: "追踪体重趋势", desc: "记录体重趋势和训练情况，一目了然" },
+  { icon: Dumbbell, title: "动态调整热量目标", desc: "根据你的真实进度，自动调整每日热量与宏量目标" },
+  { icon: MessageCircle, title: "每周AI教练复盘", desc: "每周分析你的数据，给出具体可执行的调整建议" },
 ];
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F3F8F1] to-white">
+    <div className="min-h-screen bg-[#0E1117]">
       <div className="max-w-md mx-auto px-6 pt-16 pb-10">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
-            AI 营养教练
+          <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
+            AI Nutrition Coach
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-3">MacroPilot</h1>
-          <p className="text-slate-500 text-base leading-relaxed">
-            拍照记录三餐，AI 帮你估算营养，
+          <h1 className="text-4xl font-bold text-white tracking-tight mb-2">FluxFit</h1>
+          <p className="text-emerald-400 text-sm font-medium mb-4">动态热量追踪 · 自动调整减脂计划</p>
+          <p className="text-slate-400 text-base leading-relaxed">
+            AI帮你记录饮食、估算热量、分析体重趋势，
             <br />
-            每周动态调整目标，更轻松地减脂增肌。
+            并自动调整减脂计划。
           </p>
         </div>
 
         <div className="space-y-4 mb-10">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex gap-4 bg-white rounded-2xl p-4 shadow-sm border border-black/5">
-              <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
-                <Icon className="w-5 h-5 text-emerald-600" />
+            <div key={title} className="flex gap-4 bg-[#171B22] rounded-2xl p-4 border border-white/5">
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
+                <Icon className="w-5 h-5 text-emerald-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900 text-sm mb-1">{title}</h3>
-                <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-semibold text-white text-sm mb-1">{title}</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">{desc}</p>
               </div>
             </div>
           ))}
@@ -41,15 +43,15 @@ export default function Landing() {
         <div className="space-y-3">
           <Link
             to="/register"
-            className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl shadow-lg shadow-emerald-600/20 transition-colors"
+            className="block text-center bg-emerald-500 hover:bg-emerald-600 text-[#0E1117] font-semibold py-3.5 rounded-2xl shadow-lg shadow-emerald-500/20 transition-colors"
           >
-            开始使用 Get Started
+            开始使用
           </Link>
           <Link
             to="/login"
-            className="block text-center bg-white border border-slate-200 text-slate-700 font-semibold py-3.5 rounded-2xl transition-colors hover:bg-slate-50"
+            className="block text-center bg-[#171B22] border border-white/10 text-white font-semibold py-3.5 rounded-2xl transition-colors hover:bg-white/5"
           >
-            登录 Log In
+            登录
           </Link>
         </div>
       </div>

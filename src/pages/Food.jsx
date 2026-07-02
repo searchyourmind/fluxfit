@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { Copy, Trash2, ChevronLeft } from "lucide-react";
+import { Copy, Trash2, ChevronLeft, BookmarkPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const MEAL_TYPES = [
@@ -34,6 +34,16 @@ export default function Food() {
     load();
   };
 
+  const handleSaveAsMeal = async (log) => {
+    await base44.entities.SavedMeal.create({
+      name: log.description,
+      calories: log.calories,
+      protein_g: log.protein_g,
+      carbs_g: log.carbs_g,
+      fat_g: log.fat_g,
+    });
+  };
+
   const groupedByDate = logs.reduce((acc, log) => {
     const date = (log.created_date || "").split("T")[0];
     acc[date] = acc[date] || [];
@@ -43,7 +53,7 @@ export default function Food() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0B0F0E]">
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
         <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
@@ -71,7 +81,7 @@ export default function Food() {
                 <p className="text-xs text-slate-500 mb-1.5 ml-1">{label}</p>
                 <div className="space-y-2">
                   {mealLogs.map((log) => (
-                    <div key={log.id} className="flex items-center gap-3 bg-[#151A19] rounded-2xl p-3 border border-white/5">
+                    <div key={log.id} className="flex items-center gap-3 bg-[#171B22] rounded-2xl p-3 border border-white/5">
                       {log.image_url ? (
                         <img src={log.image_url} alt={log.description} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                       ) : (
@@ -86,10 +96,13 @@ export default function Food() {
                         </p>
                       </div>
                       <div className="flex gap-1 shrink-0">
-                        <button onClick={() => handleCopyToToday(log)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-slate-400">
+                        <button onClick={() => handleSaveAsMeal(log)} title="存为常用餐食" className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-slate-400">
+                          <BookmarkPlus className="w-3.5 h-3.5" />
+                        </button>
+                        <button onClick={() => handleCopyToToday(log)} title="复制到今天" className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-slate-400">
                           <Copy className="w-3.5 h-3.5" />
                         </button>
-                        <button onClick={() => handleDelete(log.id)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-red-400">
+                        <button onClick={() => handleDelete(log.id)} title="删除" className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-red-400">
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>

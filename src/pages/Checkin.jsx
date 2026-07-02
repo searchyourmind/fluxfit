@@ -121,33 +121,33 @@ export default function Checkin() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0B0F0E]">
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
         <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0B0F0E]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
         <h1 className="text-lg font-bold text-white">每周检查</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">平均每日热量</p>
           <p className="text-xl font-bold text-white">{result.avgCalories} kcal</p>
         </div>
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">平均蛋白质</p>
           <p className="text-xl font-bold text-white">{result.avgProtein} g</p>
         </div>
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">体重变化</p>
           <p className="text-xl font-bold text-white">{result.weightChange} kg</p>
         </div>
-        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5">
+        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
           <p className="text-xs text-slate-500 mb-1">训练次数</p>
           <p className="text-xl font-bold text-white">{result.trainingSessions}</p>
         </div>
@@ -159,7 +159,7 @@ export default function Checkin() {
         ))}
       </div>
 
-      <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5 mb-6 flex items-center justify-between">
+      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 mb-6 flex items-center justify-between">
         <span className="text-sm text-slate-300">建议调整</span>
         <span className={`text-lg font-bold ${result.adjustment > 0 ? "text-emerald-400" : result.adjustment < 0 ? "text-red-400" : "text-white"}`}>
           {result.adjustment >= 0 ? "+" : ""}{result.adjustment} kcal

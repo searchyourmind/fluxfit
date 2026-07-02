@@ -1,6 +1,6 @@
 export default function ExpenditureCard({ expenditure }) {
   return (
-    <div className="bg-[#151A19] rounded-3xl p-5 border border-white/5 mb-4">
+    <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
       <p className="text-xs text-slate-500 mb-1">预估每日消耗 (TDEE)</p>
       {expenditure?.insufficientData ? (
         <p className="text-sm text-slate-400 mt-1">数据不足，继续记录体重和饮食至少 7 天</p>

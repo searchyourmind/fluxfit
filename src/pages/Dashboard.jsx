@@ -45,7 +45,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0B0F0E]">
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
         <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
@@ -57,11 +57,17 @@ export default function Dashboard() {
   const fat = todayLogs.reduce((s, l) => s + (l.fat_g || 0), 0);
   const remaining = target ? Math.max(0, target.calories - consumed) : 0;
 
+  const proteinRemaining = Math.max(0, Math.round((target?.protein_g || 0) - protein));
+  const summary = target
+    ? `今天还剩 ${Math.round(remaining)} kcal${proteinRemaining > 0 ? `，蛋白质还差 ${proteinRemaining}g` : "，蛋白质已达标"}。`
+    : "设置目标后即可查看每日概览。";
+
   return (
     <div className="px-5 pt-8">
-      <h1 className="text-xl font-bold text-white mb-5">今天</h1>
+      <h1 className="text-xl font-bold text-white mb-1">今天</h1>
+      <p className="text-sm text-emerald-400 mb-5">{summary}</p>
 
-      <div className="bg-[#151A19] rounded-3xl p-5 border border-white/5 mb-4">
+      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
         <div className="flex items-center justify-between mb-5">
           <div>
             <p className="text-3xl font-bold text-white">{Math.round(consumed)}</p>
@@ -73,15 +79,15 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="space-y-3">
-          <MacroBar label="蛋白质" current={protein} target={target?.protein_g || 0} color="#34D399" />
-          <MacroBar label="碳水" current={carbs} target={target?.carbs_g || 0} color="#FBBF24" />
-          <MacroBar label="脂肪" current={fat} target={target?.fat_g || 0} color="#F87171" />
+          <MacroBar label="蛋白质" current={protein} target={target?.protein_g || 0} color="hsl(258 80% 68%)" />
+          <MacroBar label="碳水" current={carbs} target={target?.carbs_g || 0} color="hsl(38 92% 55%)" />
+          <MacroBar label="脂肪" current={fat} target={target?.fat_g || 0} color="hsl(340 82% 62%)" />
         </div>
       </div>
 
       <ExpenditureCard expenditure={expenditure} />
 
-      <div className="bg-[#151A19] rounded-3xl p-5 border border-white/5 mb-4 flex items-center justify-between">
+      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4 flex items-center justify-between">
         <div>
           <p className="text-xs text-slate-500 mb-1">最新体重</p>
           <p className="text-xl font-bold text-white">{latestWeight ? `${latestWeight.weight_kg} kg` : "未记录"}</p>
@@ -90,15 +96,15 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <Link to="/food/add" className="flex flex-col items-center gap-1.5 bg-[#151A19] rounded-2xl py-4 border border-white/5">
+        <Link to="/food/add" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
           <Camera className="w-5 h-5 text-emerald-400" />
           <span className="text-xs font-medium text-slate-300">记录食物</span>
         </Link>
-        <Link to="/weight" className="flex flex-col items-center gap-1.5 bg-[#151A19] rounded-2xl py-4 border border-white/5">
+        <Link to="/weight" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
           <Scale className="w-5 h-5 text-emerald-400" />
           <span className="text-xs font-medium text-slate-300">记录体重</span>
         </Link>
-        <Link to="/training" className="flex flex-col items-center gap-1.5 bg-[#151A19] rounded-2xl py-4 border border-white/5">
+        <Link to="/training" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
           <Dumbbell className="w-5 h-5 text-emerald-400" />
           <span className="text-xs font-medium text-slate-300">记录训练</span>
         </Link>
