@@ -4,13 +4,13 @@ export default function FoodLogItem({ log, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`flex items-center gap-3 bg-card rounded-2xl p-3 border border-border ${onClick ? "cursor-pointer active:opacity-70" : ""}`}
+      className={`flex items-center gap-3 glass-card rounded-2xl p-3 ${onClick ? "cursor-pointer active:opacity-70" : ""}`}
     >
       {log.image_url ? (
-        <img src={log.image_url} alt={log.description} className="w-14 h-14 rounded-xl object-cover shrink-0" />
+        <img src={log.image_url} alt={log.description} className="w-12 h-12 rounded-xl object-cover shrink-0" />
       ) : (
-        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-medium">
-          {MEAL_LABELS[log.meal_type] || "食物"}
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-lg" style={{ background: "rgba(58,134,255,0.12)" }}>
+          🍽️
         </div>
       )}
       <div className="flex-1 min-w-0">

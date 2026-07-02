@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 225 50% 6%;
     --foreground: 210 40% 96%;
     --card: 217 33% 17%;
     --card-foreground: 210 40% 96%;
@@ -48,7 +48,7 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 225 50% 6%;
     --foreground: 210 40% 96%;
     --card: 217 33% 17%;
     --card-foreground: 210 40% 96%;
@@ -90,5 +90,14 @@
 
   body {
     @apply bg-background text-foreground font-body;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 }

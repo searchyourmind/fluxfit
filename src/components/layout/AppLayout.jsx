@@ -12,9 +12,26 @@ const NAV_ITEMS = [
 export default function AppLayout() {
   const location = useLocation();
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <Outlet />
-      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border flex justify-around items-center h-16 z-50">
+    <div className="min-h-screen bg-background pb-20 relative">
+      {/* Gradient glow */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(58,134,255,0.10) 0%, rgba(58,134,255,0.03) 35%, transparent 65%)",
+        }}
+      />
+      <div className="relative z-10">
+        <Outlet />
+      </div>
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center h-16"
+        style={{
+          background: "rgba(8,12,24,0.80)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
         {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
           const active = location.pathname === path;
           return (
