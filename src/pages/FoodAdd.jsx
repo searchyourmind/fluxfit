@@ -93,12 +93,12 @@ export default function FoodAdd() {
   };
 
   return (
-    <div className="px-5 pt-8 pb-10">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0B0F0E]">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => (mode || estimate ? (setMode(null), setEstimate(null)) : navigate(-1))}>
-          <ChevronLeft className="w-6 h-6 text-slate-700" />
+          <ChevronLeft className="w-6 h-6 text-white" />
         </button>
-        <h1 className="text-lg font-bold text-slate-900">添加食物</h1>
+        <h1 className="text-lg font-bold text-white">添加食物</h1>
       </div>
 
       {!mode && !estimate && (
@@ -107,12 +107,12 @@ export default function FoodAdd() {
             <button
               key={key}
               onClick={() => setMode(key)}
-              className="flex items-center gap-4 bg-white rounded-2xl p-4 border border-black/5 shadow-sm"
+              className="flex items-center gap-4 bg-[#151A19] rounded-2xl p-4 border border-white/5"
             >
-              <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center">
-                <Icon className="w-5 h-5 text-emerald-600" />
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-emerald-400" />
               </div>
-              <span className="font-medium text-slate-900">{label}</span>
+              <span className="font-medium text-white">{label}</span>
             </button>
           ))}
         </div>
@@ -122,13 +122,13 @@ export default function FoodAdd() {
         <div>
           {analyzing ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <div className="w-8 h-8 border-4 border-slate-200 border-t-emerald-600 rounded-full animate-spin" />
-              <p className="text-sm text-slate-400">AI 正在识别中...</p>
+              <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
+              <p className="text-sm text-slate-500">AI 正在识别中...</p>
             </div>
           ) : (
-            <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-emerald-200 rounded-2xl py-16 cursor-pointer">
-              <Camera className="w-8 h-8 text-emerald-500" />
-              <span className="text-sm font-medium text-slate-600">点击上传食物照片</span>
+            <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-emerald-500/20 rounded-2xl py-16 cursor-pointer">
+              <Camera className="w-8 h-8 text-emerald-400" />
+              <span className="text-sm font-medium text-slate-400">点击上传食物照片</span>
               <input
                 type="file"
                 accept="image/*"
@@ -153,6 +153,8 @@ export default function FoodAdd() {
           </Button>
         </div>
       )}
+
+      {mode === "text" && !estimate && null}
 
       {mode === "manual" && !estimate && (
         <Button

@@ -49,17 +49,17 @@ export default function Coach() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-[#0B0F0E]">
       <div className="flex items-center gap-3 px-5 pt-8 pb-4">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-slate-700" /></button>
-        <h1 className="text-lg font-bold text-slate-900">AI 教练</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
+        <h1 className="text-lg font-bold text-white">AI 教练</h1>
       </div>
 
       <div className="flex-1 overflow-y-auto px-5 space-y-3 pb-4">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-              m.role === "user" ? "bg-emerald-600 text-white" : "bg-white border border-black/5 text-slate-700"
+              m.role === "user" ? "bg-emerald-600 text-white" : "bg-[#151A19] border border-white/5 text-slate-200"
             }`}>
               {m.content}
             </div>
@@ -67,20 +67,20 @@ export default function Coach() {
         ))}
         {sending && (
           <div className="flex justify-start">
-            <div className="bg-white border border-black/5 rounded-2xl px-4 py-2.5 text-sm text-slate-400">思考中...</div>
+            <div className="bg-[#151A19] border border-white/5 rounded-2xl px-4 py-2.5 text-sm text-slate-500">思考中...</div>
           </div>
         )}
         <div ref={bottomRef} />
       </div>
 
-      <div className="px-5 pb-24 pt-2 border-t border-black/5 bg-white/80 backdrop-blur">
+      <div className="px-5 pb-24 pt-2 border-t border-white/5 bg-[#0B0F0E]/80 backdrop-blur">
         <div className="flex gap-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="问问教练..."
-            className="flex-1 h-11 rounded-full border border-slate-200 px-4 text-sm outline-none focus:border-emerald-400"
+            className="flex-1 h-11 rounded-full border border-white/10 bg-[#151A19] text-white px-4 text-sm outline-none focus:border-emerald-400"
           />
           <button onClick={handleSend} disabled={sending} className="w-11 h-11 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
             <Send className="w-4 h-4 text-white" />

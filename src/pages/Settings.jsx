@@ -29,27 +29,27 @@ export default function Settings() {
   const handleLogout = () => base44.auth.logout("/");
 
   return (
-    <div className="px-5 pt-8 pb-10">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0B0F0E]">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-slate-700" /></button>
-        <h1 className="text-lg font-bold text-slate-900">我的</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
+        <h1 className="text-lg font-bold text-white">我的</h1>
       </div>
 
       {profile && (
-        <div className="bg-white rounded-2xl p-4 border border-black/5 mb-4 space-y-2">
-          <p className="text-sm"><span className="text-slate-400">姓名：</span>{profile.name}</p>
-          <p className="text-sm"><span className="text-slate-400">年龄：</span>{profile.age}</p>
-          <p className="text-sm"><span className="text-slate-400">身高：</span>{profile.height_cm} cm</p>
-          <p className="text-sm"><span className="text-slate-400">当前体重：</span>{profile.current_weight_kg} kg</p>
-          <p className="text-sm"><span className="text-slate-400">目标体重：</span>{profile.goal_weight_kg} kg</p>
+        <div className="bg-[#151A19] rounded-2xl p-4 border border-white/5 mb-4 space-y-2">
+          <p className="text-sm text-slate-200"><span className="text-slate-500">姓名：</span>{profile.name}</p>
+          <p className="text-sm text-slate-200"><span className="text-slate-500">年龄：</span>{profile.age}</p>
+          <p className="text-sm text-slate-200"><span className="text-slate-500">身高：</span>{profile.height_cm} cm</p>
+          <p className="text-sm text-slate-200"><span className="text-slate-500">当前体重：</span>{profile.current_weight_kg} kg</p>
+          <p className="text-sm text-slate-200"><span className="text-slate-500">目标体重：</span>{profile.goal_weight_kg} kg</p>
         </div>
       )}
 
-      <Button onClick={handleRecalculate} disabled={recalculating || !profile} variant="outline" className="w-full mb-3 rounded-xl">
+      <Button onClick={handleRecalculate} disabled={recalculating || !profile} variant="outline" className="w-full mb-3 rounded-xl bg-[#151A19] border-white/10 text-white hover:bg-[#1c2220]">
         {recalculating ? "计算中..." : "重新计算目标"}
       </Button>
 
-      <Button onClick={handleLogout} variant="outline" className="w-full rounded-xl text-red-600 border-red-200 hover:bg-red-50">
+      <Button onClick={handleLogout} variant="outline" className="w-full rounded-xl text-red-400 border-red-400/20 bg-[#151A19] hover:bg-red-500/10">
         <LogOut className="w-4 h-4 mr-2" /> 退出登录
       </Button>
     </div>

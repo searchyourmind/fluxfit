@@ -14,6 +14,8 @@ import ResetPassword from '@/pages/ResetPassword';
 import Landing from '@/pages/Landing';
 import Onboarding from '@/pages/Onboarding';
 import Dashboard from '@/pages/Dashboard';
+import Food from '@/pages/Food';
+import Strategy from '@/pages/Strategy';
 import FoodAdd from '@/pages/FoodAdd';
 import Weight from '@/pages/Weight';
 import Training from '@/pages/Training';
@@ -58,6 +60,8 @@ const AuthenticatedApp = () => {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/food" element={<Food />} />
+          <Route path="/strategy" element={<Strategy />} />
           <Route path="/food/add" element={<FoodAdd />} />
           <Route path="/weight" element={<Weight />} />
           <Route path="/training" element={<Training />} />

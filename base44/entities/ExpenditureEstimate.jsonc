@@ -1,0 +1,23 @@
+{
+  "name": "ExpenditureEstimate",
+  "type": "object",
+  "properties": {
+    "estimated_expenditure": {
+      "type": "number"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "method": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "estimated_expenditure"
+  ]
+}
