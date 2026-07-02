@@ -42,7 +42,7 @@ export default function Coach() {
     const protein = todayLogs.reduce((s, l) => s + (l.protein_g || 0), 0);
 
     const reply = await base44.integrations.Core.InvokeLLM({
-      prompt: `你是 MacroPilot 的 AI 营养教练，说中文，语气温暖友好、专业直接。
+      prompt: `你是 FluxFit 的 AI 营养教练，说中文，语气温暖友好、专业直接。
 用户目标：${target ? `${target.calories} kcal，蛋白质 ${target.protein_g}g，碳水 ${target.carbs_g}g，脂肪 ${target.fat_g}g` : "暂无目标"}
 今日已摄入：${Math.round(consumed)} kcal，蛋白质 ${Math.round(protein)}g
 最近体重记录：${weights.map((w) => `${w.log_date}: ${w.weight_kg}kg`).join(", ") || "暂无"}
@@ -58,17 +58,17 @@ export default function Coach() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#0E1117]">
+    <div className="flex flex-col h-screen bg-background">
       <div className="flex items-center gap-3 px-5 pt-8 pb-4">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
-        <h1 className="text-lg font-bold text-white">AI 教练</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
+        <h1 className="text-lg font-heading font-bold text-foreground">AI 教练</h1>
       </div>
 
       <div className="flex-1 overflow-y-auto px-5 space-y-3 pb-4">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-              m.role === "user" ? "bg-emerald-600 text-white" : "bg-[#171B22] border border-white/5 text-slate-200"
+              m.role === "user" ? "bg-primary text-primary-foreground" : "bg-card border border-border text-foreground"
             }`}>
               {m.content}
             </div>
@@ -76,7 +76,7 @@ export default function Coach() {
         ))}
         {sending && (
           <div className="flex justify-start">
-            <div className="bg-[#171B22] border border-white/5 rounded-2xl px-4 py-2.5 text-sm text-slate-500">思考中...</div>
+            <div className="bg-card border border-border rounded-2xl px-4 py-2.5 text-sm text-muted-foreground">思考中...</div>
           </div>
         )}
         <div ref={bottomRef} />
@@ -88,7 +88,7 @@ export default function Coach() {
             <button
               key={q}
               onClick={() => handleSend(q)}
-              className="text-xs bg-[#171B22] border border-white/10 text-slate-300 px-3 py-1.5 rounded-full"
+              className="text-xs bg-card border border-border text-muted-foreground px-3 py-1.5 rounded-full"
             >
               {q}
             </button>
@@ -96,17 +96,17 @@ export default function Coach() {
         </div>
       )}
 
-      <div className="px-5 pb-24 pt-2 border-t border-white/5 bg-[#0E1117]/80 backdrop-blur">
+      <div className="px-5 pb-24 pt-2 border-t border-border bg-background/80 backdrop-blur">
         <div className="flex gap-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="问问教练..."
-            className="flex-1 h-11 rounded-full border border-white/10 bg-[#171B22] text-white px-4 text-sm outline-none focus:border-emerald-400"
+            className="flex-1 h-11 rounded-full border border-border bg-card text-foreground px-4 text-sm outline-none focus:border-primary"
           />
-          <button onClick={() => handleSend()} disabled={sending} className="w-11 h-11 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
-            <Send className="w-4 h-4 text-white" />
+          <button onClick={() => handleSend()} disabled={sending} className="w-11 h-11 rounded-full bg-primary flex items-center justify-center shrink-0">
+            <Send className="w-4 h-4 text-primary-foreground" />
           </button>
         </div>
       </div>

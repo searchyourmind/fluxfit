@@ -53,8 +53,8 @@ export default function Strategy() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
-        <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -64,64 +64,64 @@ export default function Strategy() {
   return (
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
-        <h1 className="text-lg font-bold text-white">营养策略</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
+        <h1 className="text-lg font-heading font-bold text-foreground">营养策略</h1>
       </div>
 
-      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
-        <p className="text-xs text-slate-500 mb-1">当前目标</p>
-        <p className="text-xl font-bold text-white mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
+      <div className="bg-card rounded-3xl p-5 border border-border mb-4">
+        <p className="text-xs text-muted-foreground mb-1">当前目标</p>
+        <p className="text-xl font-bold text-foreground mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-xs text-slate-500">目标热量</p>
-            <p className="text-lg font-bold text-white">{target?.calories ?? "-"} kcal</p>
+            <p className="text-xs text-muted-foreground">目标热量</p>
+            <p className="text-lg font-bold text-foreground">{target?.calories ?? "-"} kcal</p>
           </div>
           <div>
-            <p className="text-xs text-slate-500">目标节奏</p>
-            <p className="text-lg font-bold text-white">{profile ? PACE_LABELS[profile.target_pace] : "-"}</p>
+            <p className="text-xs text-muted-foreground">目标节奏</p>
+            <p className="text-lg font-bold text-foreground">{profile ? PACE_LABELS[profile.target_pace] : "-"}</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
-        <p className="text-xs text-slate-500 mb-3">宏量营养素目标</p>
+      <div className="bg-card rounded-3xl p-5 border border-border mb-4">
+        <p className="text-xs text-muted-foreground mb-3">宏量营养素目标</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
-            <p className="text-lg font-bold text-emerald-400">{target?.protein_g ?? "-"}g</p>
-            <p className="text-[11px] text-slate-500">蛋白质</p>
+            <p className="text-lg font-bold text-protein">{target?.protein_g ?? "-"}g</p>
+            <p className="text-[11px] text-muted-foreground">蛋白质</p>
           </div>
           <div>
-            <p className="text-lg font-bold text-amber-400">{target?.carbs_g ?? "-"}g</p>
-            <p className="text-[11px] text-slate-500">碳水</p>
+            <p className="text-lg font-bold text-carbs">{target?.carbs_g ?? "-"}g</p>
+            <p className="text-[11px] text-muted-foreground">碳水</p>
           </div>
           <div>
-            <p className="text-lg font-bold text-red-400">{target?.fat_g ?? "-"}g</p>
-            <p className="text-[11px] text-slate-500">脂肪</p>
+            <p className="text-lg font-bold text-fat">{target?.fat_g ?? "-"}g</p>
+            <p className="text-[11px] text-muted-foreground">脂肪</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">预估消耗</p>
-          <p className="text-lg font-bold text-white">
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">预估消耗</p>
+          <p className="text-lg font-bold text-foreground">
             {expenditure ? `${expenditure.estimated_expenditure} kcal` : "数据不足"}
           </p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">目标变化速度</p>
-          <p className="text-lg font-bold text-white">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">目标变化速度</p>
+          <p className="text-lg font-bold text-foreground">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
         </div>
       </div>
 
-      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 mb-4 flex items-center justify-between">
-        <span className="text-sm text-slate-300">本周记录依从度</span>
-        <span className="text-lg font-bold text-emerald-400">{adherence}%</span>
+      <div className="bg-card rounded-2xl p-4 border border-border mb-4 flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">本周记录依从度</span>
+        <span className="text-lg font-bold text-primary">{adherence}%</span>
       </div>
 
-      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 flex items-center justify-between">
-        <span className="text-sm text-slate-300">下次检查时间</span>
-        <span className="text-sm font-semibold text-white">{nextCheckin}</span>
+      <div className="bg-card rounded-2xl p-4 border border-border flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">下次检查时间</span>
+        <span className="text-sm font-semibold text-foreground">{nextCheckin}</span>
       </div>
     </div>
   );

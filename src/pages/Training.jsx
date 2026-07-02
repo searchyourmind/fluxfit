@@ -38,15 +38,15 @@ export default function Training() {
   };
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
-        <h1 className="text-lg font-bold text-white">训练记录</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
+        <h1 className="text-lg font-heading font-bold text-foreground">训练记录</h1>
       </div>
 
-      <form onSubmit={handleSave} className="bg-[#171B22] rounded-2xl p-4 border border-white/5 space-y-4 mb-6">
+      <form onSubmit={handleSave} className="bg-card rounded-2xl p-4 border border-border space-y-4 mb-6">
         <div>
-          <Label className="text-slate-300">训练类型</Label>
+          <Label className="text-muted-foreground">训练类型</Label>
           <div className="grid grid-cols-4 gap-2 mt-1.5">
             {TYPES.map((t) => (
               <button
@@ -54,7 +54,7 @@ export default function Training() {
                 key={t.value}
                 onClick={() => setForm((f) => ({ ...f, training_type: t.value }))}
                 className={`py-2 rounded-xl text-xs font-medium border ${
-                  form.training_type === t.value ? "bg-emerald-600 text-white border-emerald-600" : "border-white/10 text-slate-400"
+                  form.training_type === t.value ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground"
                 }`}
               >
                 {t.label}
@@ -64,27 +64,27 @@ export default function Training() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label className="text-slate-300">时长 (分钟)</Label>
-            <Input type="number" value={form.duration_min} onChange={(e) => setForm((f) => ({ ...f, duration_min: e.target.value }))} className="mt-1.5 bg-[#0E1117] border-white/10 text-white" />
+            <Label className="text-muted-foreground">时长 (分钟)</Label>
+            <Input type="number" value={form.duration_min} onChange={(e) => setForm((f) => ({ ...f, duration_min: e.target.value }))} className="mt-1.5 bg-background border-border text-foreground" />
           </div>
           <div>
-            <Label className="text-slate-300">步数</Label>
-            <Input type="number" value={form.steps} onChange={(e) => setForm((f) => ({ ...f, steps: e.target.value }))} className="mt-1.5 bg-[#0E1117] border-white/10 text-white" />
+            <Label className="text-muted-foreground">步数</Label>
+            <Input type="number" value={form.steps} onChange={(e) => setForm((f) => ({ ...f, steps: e.target.value }))} className="mt-1.5 bg-background border-border text-foreground" />
           </div>
         </div>
         <div>
-          <Label className="text-slate-300">备注</Label>
-          <Textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className="mt-1.5 bg-[#0E1117] border-white/10 text-white" />
+          <Label className="text-muted-foreground">备注</Label>
+          <Textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className="mt-1.5 bg-background border-border text-foreground" />
         </div>
-        <Button type="submit" disabled={saving} className="w-full bg-emerald-600 hover:bg-emerald-700 rounded-xl">保存记录</Button>
+        <Button type="submit" disabled={saving} className="w-full rounded-xl">保存记录</Button>
       </form>
 
       <div className="space-y-2">
         {logs.map((log) => (
-          <div key={log.id} className="bg-[#171B22] rounded-2xl p-3 border border-white/5 flex justify-between items-center">
+          <div key={log.id} className="bg-card rounded-2xl p-3 border border-border flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-white">{TYPES.find((t) => t.value === log.training_type)?.label}</p>
-              <p className="text-xs text-slate-500">{log.log_date} {log.duration_min ? `· ${log.duration_min}分钟` : ""} {log.steps ? `· ${log.steps}步` : ""}</p>
+              <p className="text-sm font-medium text-foreground">{TYPES.find((t) => t.value === log.training_type)?.label}</p>
+              <p className="text-xs text-muted-foreground">{log.log_date} {log.duration_min ? `· ${log.duration_min}分钟` : ""} {log.steps ? `· ${log.steps}步` : ""}</p>
             </div>
           </div>
         ))}

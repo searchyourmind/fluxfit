@@ -45,8 +45,8 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
-        <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -64,58 +64,58 @@ export default function Dashboard() {
 
   return (
     <div className="px-5 pt-8">
-      <h1 className="text-xl font-bold text-white mb-1">今天</h1>
-      <p className="text-sm text-emerald-400 mb-5">{summary}</p>
+      <h1 className="text-xl font-heading font-bold text-foreground mb-1">今天</h1>
+      <p className="text-sm text-primary mb-5">{summary}</p>
 
-      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4">
+      <div className="bg-card rounded-3xl p-5 border border-border mb-4">
         <div className="flex items-center justify-between mb-5">
           <div>
-            <p className="text-3xl font-bold text-white">{Math.round(consumed)}</p>
-            <p className="text-xs text-slate-500">已摄入 kcal</p>
+            <p className="text-3xl font-bold text-foreground">{Math.round(consumed)}</p>
+            <p className="text-xs text-muted-foreground">已摄入 kcal</p>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-emerald-400">{Math.round(remaining)}</p>
-            <p className="text-xs text-slate-500">剩余 kcal</p>
+            <p className="text-3xl font-bold text-primary">{Math.round(remaining)}</p>
+            <p className="text-xs text-muted-foreground">剩余 kcal</p>
           </div>
         </div>
         <div className="space-y-3">
-          <MacroBar label="蛋白质" current={protein} target={target?.protein_g || 0} color="hsl(258 80% 68%)" />
-          <MacroBar label="碳水" current={carbs} target={target?.carbs_g || 0} color="hsl(38 92% 55%)" />
-          <MacroBar label="脂肪" current={fat} target={target?.fat_g || 0} color="hsl(340 82% 62%)" />
+          <MacroBar label="蛋白质" current={protein} target={target?.protein_g || 0} color="hsl(var(--protein))" />
+          <MacroBar label="碳水" current={carbs} target={target?.carbs_g || 0} color="hsl(var(--carbs))" />
+          <MacroBar label="脂肪" current={fat} target={target?.fat_g || 0} color="hsl(var(--fat))" />
         </div>
       </div>
 
       <ExpenditureCard expenditure={expenditure} />
 
-      <div className="bg-[#171B22] rounded-3xl p-5 border border-white/5 mb-4 flex items-center justify-between">
+      <div className="bg-card rounded-3xl p-5 border border-border mb-4 flex items-center justify-between">
         <div>
-          <p className="text-xs text-slate-500 mb-1">最新体重</p>
-          <p className="text-xl font-bold text-white">{latestWeight ? `${latestWeight.weight_kg} kg` : "未记录"}</p>
+          <p className="text-xs text-muted-foreground mb-1">最新体重</p>
+          <p className="text-xl font-bold text-foreground">{latestWeight ? `${latestWeight.weight_kg} kg` : "未记录"}</p>
         </div>
-        <Link to="/weight" className="text-xs font-semibold text-emerald-400">查看趋势 →</Link>
+        <Link to="/weight" className="text-xs font-semibold text-primary">查看趋势 →</Link>
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <Link to="/food/add" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
-          <Camera className="w-5 h-5 text-emerald-400" />
-          <span className="text-xs font-medium text-slate-300">记录食物</span>
+        <Link to="/food/add" className="flex flex-col items-center gap-1.5 bg-card rounded-2xl py-4 border border-border">
+          <Camera className="w-5 h-5 text-primary" />
+          <span className="text-xs font-medium text-muted-foreground">记录食物</span>
         </Link>
-        <Link to="/weight" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
-          <Scale className="w-5 h-5 text-emerald-400" />
-          <span className="text-xs font-medium text-slate-300">记录体重</span>
+        <Link to="/weight" className="flex flex-col items-center gap-1.5 bg-card rounded-2xl py-4 border border-border">
+          <Scale className="w-5 h-5 text-primary" />
+          <span className="text-xs font-medium text-muted-foreground">记录体重</span>
         </Link>
-        <Link to="/training" className="flex flex-col items-center gap-1.5 bg-[#171B22] rounded-2xl py-4 border border-white/5">
-          <Dumbbell className="w-5 h-5 text-emerald-400" />
-          <span className="text-xs font-medium text-slate-300">记录训练</span>
+        <Link to="/training" className="flex flex-col items-center gap-1.5 bg-card rounded-2xl py-4 border border-border">
+          <Dumbbell className="w-5 h-5 text-primary" />
+          <span className="text-xs font-medium text-muted-foreground">记录训练</span>
         </Link>
       </div>
 
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-semibold text-white">今日饮食记录</h2>
-        <Link to="/food" className="text-xs font-semibold text-emerald-400">查看全部 →</Link>
+        <h2 className="text-sm font-semibold text-foreground">今日饮食记录</h2>
+        <Link to="/food" className="text-xs font-semibold text-primary">查看全部 →</Link>
       </div>
       <div className="space-y-2">
-        {todayLogs.length === 0 && <p className="text-sm text-slate-500 text-center py-6">还没有记录，去添加第一餐吧</p>}
+        {todayLogs.length === 0 && <p className="text-sm text-muted-foreground text-center py-6">还没有记录，去添加第一餐吧</p>}
         {todayLogs.map((log) => (
           <FoodLogItem key={log.id} log={log} />
         ))}

@@ -37,40 +37,40 @@ export default function Weight() {
   const trend = last14.length >= 2 ? (last14[0].weight_kg - last14[last14.length - 1].weight_kg).toFixed(1) : null;
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
-        <h1 className="text-lg font-bold text-white">体重记录</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
+        <h1 className="text-lg font-heading font-bold text-foreground">体重记录</h1>
       </div>
 
       <form onSubmit={handleSave} className="flex gap-2 mb-6">
-        <Input type="number" step="0.1" placeholder="今日体重 (kg)" value={weight} onChange={(e) => setWeight(e.target.value)} required className="bg-[#171B22] border-white/10 text-white" />
-        <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 shrink-0">保存</Button>
+        <Input type="number" step="0.1" placeholder="今日体重 (kg)" value={weight} onChange={(e) => setWeight(e.target.value)} required className="bg-card border-border text-foreground" />
+        <Button type="submit" disabled={saving} className="shrink-0">保存</Button>
       </form>
 
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="bg-[#171B22] rounded-2xl p-3 border border-white/5 text-center">
-          <p className="text-lg font-bold text-white">{latest ? latest.weight_kg : "-"}</p>
-          <p className="text-[11px] text-slate-500 mt-0.5">最新体重</p>
+        <div className="bg-card rounded-2xl p-3 border border-border text-center">
+          <p className="text-lg font-bold text-foreground">{latest ? latest.weight_kg : "-"}</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">最新体重</p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-3 border border-white/5 text-center">
-          <p className="text-lg font-bold text-white">{avg7 ?? "-"}</p>
-          <p className="text-[11px] text-slate-500 mt-0.5">7天平均</p>
+        <div className="bg-card rounded-2xl p-3 border border-border text-center">
+          <p className="text-lg font-bold text-foreground">{avg7 ?? "-"}</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">7天平均</p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-3 border border-white/5 text-center">
-          <p className={`text-lg font-bold ${trend < 0 ? "text-emerald-400" : "text-white"}`}>{trend ?? "-"}</p>
-          <p className="text-[11px] text-slate-500 mt-0.5">14天变化</p>
+        <div className="bg-card rounded-2xl p-3 border border-border text-center">
+          <p className={`text-lg font-bold ${trend < 0 ? "text-primary" : "text-foreground"}`}>{trend ?? "-"}</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">14天变化</p>
         </div>
       </div>
 
       {chartData.length > 1 && (
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 h-56">
+        <div className="bg-card rounded-2xl p-4 border border-border h-56">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
-              <XAxis dataKey="date" fontSize={11} stroke="#64748b" />
-              <YAxis domain={["dataMin - 1", "dataMax + 1"]} fontSize={11} stroke="#64748b" />
-              <Tooltip contentStyle={{ background: "#151A19", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8 }} labelStyle={{ color: "#fff" }} />
-              <Line type="monotone" dataKey="weight" stroke="#34D399" strokeWidth={2} dot={false} />
+              <XAxis dataKey="date" fontSize={11} stroke="hsl(var(--muted-foreground))" />
+              <YAxis domain={["dataMin - 1", "dataMax + 1"]} fontSize={11} stroke="hsl(var(--muted-foreground))" />
+              <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }} labelStyle={{ color: "hsl(var(--foreground))" }} />
+              <Line type="monotone" dataKey="weight" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>

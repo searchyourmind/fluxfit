@@ -12,9 +12,9 @@ const NAV_ITEMS = [
 export default function AppLayout() {
   const location = useLocation();
   return (
-    <div className="min-h-screen bg-[#0E1117] pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <Outlet />
-      <nav className="fixed bottom-0 left-0 right-0 bg-[#171B22]/95 backdrop-blur-lg border-t border-white/5 flex justify-around items-center h-16 z-50">
+      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border flex justify-around items-center h-16 z-50">
         {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
           const active = location.pathname === path;
           return (
@@ -22,7 +22,7 @@ export default function AppLayout() {
               key={path}
               to={path}
               className={`flex flex-col items-center gap-1 px-3 py-1 transition-colors ${
-                active ? "text-emerald-400" : "text-slate-500"
+                active ? "text-primary" : "text-muted-foreground"
               }`}
             >
               <Icon className="w-5 h-5" strokeWidth={active ? 2.5 : 2} />

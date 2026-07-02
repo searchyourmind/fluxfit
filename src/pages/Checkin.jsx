@@ -46,7 +46,6 @@ export default function Checkin() {
 
       const trainingSessions = trainings.filter((t) => new Date(t.log_date) >= weekAgo && t.training_type !== "rest").length;
 
-      // Deterministic adjustment algorithm
       let adjustment = 0;
       const notes = [];
       const goalType = prof?.goal_type;
@@ -121,52 +120,52 @@ export default function Checkin() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E1117]">
-        <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-white" /></button>
-        <h1 className="text-lg font-bold text-white">每周检查</h1>
+        <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
+        <h1 className="text-lg font-heading font-bold text-foreground">每周检查</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">平均每日热量</p>
-          <p className="text-xl font-bold text-white">{result.avgCalories} kcal</p>
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">平均每日热量</p>
+          <p className="text-xl font-bold text-foreground">{result.avgCalories} kcal</p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">平均蛋白质</p>
-          <p className="text-xl font-bold text-white">{result.avgProtein} g</p>
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">平均蛋白质</p>
+          <p className="text-xl font-bold text-foreground">{result.avgProtein} g</p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">体重变化</p>
-          <p className="text-xl font-bold text-white">{result.weightChange} kg</p>
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">体重变化</p>
+          <p className="text-xl font-bold text-foreground">{result.weightChange} kg</p>
         </div>
-        <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5">
-          <p className="text-xs text-slate-500 mb-1">训练次数</p>
-          <p className="text-xl font-bold text-white">{result.trainingSessions}</p>
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs text-muted-foreground mb-1">训练次数</p>
+          <p className="text-xl font-bold text-foreground">{result.trainingSessions}</p>
         </div>
       </div>
 
-      <div className="bg-emerald-500/10 rounded-2xl p-4 mb-4 space-y-2">
+      <div className="bg-primary/10 rounded-2xl p-4 mb-4 space-y-2">
         {result.notes.map((n, i) => (
-          <p key={i} className="text-sm text-emerald-300 leading-relaxed">• {n}</p>
+          <p key={i} className="text-sm text-primary leading-relaxed">• {n}</p>
         ))}
       </div>
 
-      <div className="bg-[#171B22] rounded-2xl p-4 border border-white/5 mb-6 flex items-center justify-between">
-        <span className="text-sm text-slate-300">建议调整</span>
-        <span className={`text-lg font-bold ${result.adjustment > 0 ? "text-emerald-400" : result.adjustment < 0 ? "text-red-400" : "text-white"}`}>
+      <div className="bg-card rounded-2xl p-4 border border-border mb-6 flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">建议调整</span>
+        <span className={`text-lg font-bold ${result.adjustment > 0 ? "text-primary" : result.adjustment < 0 ? "text-destructive" : "text-foreground"}`}>
           {result.adjustment >= 0 ? "+" : ""}{result.adjustment} kcal
         </span>
       </div>
 
-      <Button onClick={handleApply} disabled={applying} className="w-full bg-emerald-600 hover:bg-emerald-700 py-6 rounded-2xl">
+      <Button onClick={handleApply} disabled={applying} className="w-full py-6 rounded-2xl">
         {applying ? "应用中..." : "确认并应用新目标"}
       </Button>
     </div>

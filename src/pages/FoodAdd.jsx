@@ -99,12 +99,12 @@ export default function FoodAdd() {
   };
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-[#0E1117]">
+    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => (mode || estimate ? (setMode(null), setEstimate(null)) : navigate(-1))}>
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-6 h-6 text-foreground" />
         </button>
-        <h1 className="text-lg font-bold text-white">添加食物</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">添加食物</h1>
       </div>
 
       {!mode && !estimate && (
@@ -113,12 +113,12 @@ export default function FoodAdd() {
             <button
               key={key}
               onClick={() => (key === "saved" ? (loadSavedMeals(), setMode(key)) : setMode(key))}
-              className="flex items-center gap-4 bg-[#151A19] rounded-2xl p-4 border border-white/5"
+              className="flex items-center gap-4 bg-card rounded-2xl p-4 border border-border"
             >
-              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                <Icon className="w-5 h-5 text-emerald-400" />
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-primary" />
               </div>
-              <span className="font-medium text-white">{label}</span>
+              <span className="font-medium text-foreground">{label}</span>
             </button>
           ))}
         </div>
@@ -128,13 +128,13 @@ export default function FoodAdd() {
         <div>
           {analyzing ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <div className="w-8 h-8 border-4 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
-              <p className="text-sm text-slate-500">AI 正在识别中...</p>
+              <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+              <p className="text-sm text-muted-foreground">AI 正在识别中...</p>
             </div>
           ) : (
-            <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-emerald-500/20 rounded-2xl py-16 cursor-pointer">
-              <Camera className="w-8 h-8 text-emerald-400" />
-              <span className="text-sm font-medium text-slate-400">点击上传食物照片</span>
+            <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-primary/20 rounded-2xl py-16 cursor-pointer">
+              <Camera className="w-8 h-8 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">点击上传食物照片</span>
               <input
                 type="file"
                 accept="image/*"
@@ -154,7 +154,7 @@ export default function FoodAdd() {
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
           />
-          <Button onClick={analyzeText} disabled={analyzing || !textInput.trim()} className="w-full bg-emerald-600 hover:bg-emerald-700 py-6 rounded-2xl">
+          <Button onClick={analyzeText} disabled={analyzing || !textInput.trim()} className="w-full py-6 rounded-2xl">
             {analyzing ? "AI 分析中..." : "开始分析"}
           </Button>
         </div>
@@ -164,7 +164,7 @@ export default function FoodAdd() {
 
       {mode === "saved" && !estimate && (
         <div className="space-y-2">
-          {savedMeals.length === 0 && <p className="text-sm text-slate-500 text-center py-10">还没有常用餐食，先在饮食记录里保存一个吧</p>}
+          {savedMeals.length === 0 && <p className="text-sm text-muted-foreground text-center py-10">还没有常用餐食，先在饮食记录里保存一个吧</p>}
           {savedMeals.map((meal) => (
             <button
               key={meal.id}
@@ -178,10 +178,10 @@ export default function FoodAdd() {
                 coaching_note: "",
                 image_url: "",
               })}
-              className="w-full flex items-center justify-between bg-[#171B22] rounded-2xl p-4 border border-white/5 text-left"
+              className="w-full flex items-center justify-between bg-card rounded-2xl p-4 border border-border text-left"
             >
-              <span className="font-medium text-white text-sm">{meal.name}</span>
-              <span className="text-xs text-slate-500">{Math.round(meal.calories)} kcal</span>
+              <span className="font-medium text-foreground text-sm">{meal.name}</span>
+              <span className="text-xs text-muted-foreground">{Math.round(meal.calories)} kcal</span>
             </button>
           ))}
         </div>
@@ -190,7 +190,7 @@ export default function FoodAdd() {
       {mode === "manual" && !estimate && (
         <Button
           onClick={() => setEstimate({ ...EMPTY_ESTIMATE })}
-          className="w-full bg-emerald-600 hover:bg-emerald-700 py-6 rounded-2xl"
+          className="w-full py-6 rounded-2xl"
         >
           填写详情
         </Button>
