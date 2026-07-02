@@ -53,8 +53,8 @@ export default function Food() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -72,7 +72,7 @@ export default function Food() {
 
       {Object.entries(groupedByDate).map(([date, dayLogs]) => (
         <div key={date} className="mb-6">
-          <p className="text-xs font-semibold text-muted-foreground mb-2">{date}</p>
+          <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-2">{date}</p>
           {MEAL_TYPES.map(({ value, label }) => {
             const mealLogs = dayLogs.filter((l) => l.meal_type === value);
             if (mealLogs.length === 0) return null;
@@ -81,11 +81,11 @@ export default function Food() {
                 <p className="text-xs text-muted-foreground mb-1.5 ml-1">{label}</p>
                 <div className="space-y-2">
                   {mealLogs.map((log) => (
-                    <div key={log.id} className="flex items-center gap-3 bg-card rounded-2xl p-3 border border-border">
+                    <div key={log.id} className="flex items-center gap-3 glass-card rounded-2xl p-3">
                       {log.image_url ? (
                         <img src={log.image_url} alt={log.description} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                       ) : (
-                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary text-[10px]">
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-primary text-[10px]" style={{ background: "rgba(58,134,255,0.12)" }}>
                           {label}
                         </div>
                       )}
@@ -96,13 +96,13 @@ export default function Food() {
                         </p>
                       </div>
                       <div className="flex gap-1 shrink-0">
-                        <button onClick={() => handleSaveAsMeal(log)} title="存为常用餐食" className="w-8 h-8 flex items-center justify-center rounded-lg bg-secondary text-muted-foreground">
+                        <button onClick={() => handleSaveAsMeal(log)} title="存为常用餐食" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <BookmarkPlus className="w-3.5 h-3.5" />
                         </button>
-                        <button onClick={() => handleCopyToToday(log)} title="复制到今天" className="w-8 h-8 flex items-center justify-center rounded-lg bg-secondary text-muted-foreground">
+                        <button onClick={() => handleCopyToToday(log)} title="复制到今天" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <Copy className="w-3.5 h-3.5" />
                         </button>
-                        <button onClick={() => handleDelete(log.id)} title="删除" className="w-8 h-8 flex items-center justify-center rounded-lg bg-secondary text-destructive">
+                        <button onClick={() => handleDelete(log.id)} title="删除" className="w-8 h-8 flex items-center justify-center rounded-lg text-destructive" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>

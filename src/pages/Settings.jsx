@@ -29,14 +29,14 @@ export default function Settings() {
   const handleLogout = () => base44.auth.logout("/");
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
+    <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
         <h1 className="text-lg font-heading font-bold text-foreground">我的</h1>
       </div>
 
       {profile && (
-        <div className="bg-card rounded-2xl p-4 border border-border mb-4 space-y-2">
+        <div className="glass-card rounded-[20px] p-5 mb-4 space-y-2.5">
           <p className="text-sm text-foreground"><span className="text-muted-foreground">姓名：</span>{profile.name}</p>
           <p className="text-sm text-foreground"><span className="text-muted-foreground">年龄：</span>{profile.age}</p>
           <p className="text-sm text-foreground"><span className="text-muted-foreground">身高：</span>{profile.height_cm} cm</p>
@@ -45,11 +45,11 @@ export default function Settings() {
         </div>
       )}
 
-      <Button onClick={handleRecalculate} disabled={recalculating || !profile} variant="outline" className="w-full mb-3 rounded-xl bg-card border-border text-foreground hover:bg-secondary">
+      <Button onClick={handleRecalculate} disabled={recalculating || !profile} variant="outline" className="w-full mb-3 rounded-xl glass-card border-white/10 text-foreground hover:bg-white/10">
         {recalculating ? "计算中..." : "重新计算目标"}
       </Button>
 
-      <Button onClick={handleLogout} variant="outline" className="w-full rounded-xl text-destructive border-destructive/20 bg-card hover:bg-destructive/10">
+      <Button onClick={handleLogout} variant="outline" className="w-full rounded-xl glass-card border-destructive/20 text-destructive hover:bg-destructive/10">
         <LogOut className="w-4 h-4 mr-2" /> 退出登录
       </Button>
     </div>

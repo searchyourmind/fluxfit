@@ -58,7 +58,7 @@ export default function Coach() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-screen">
       <div className="flex items-center gap-3 px-5 pt-8 pb-4">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
         <h1 className="text-lg font-heading font-bold text-foreground">AI 教练</h1>
@@ -68,7 +68,7 @@ export default function Coach() {
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-              m.role === "user" ? "bg-primary text-primary-foreground" : "bg-card border border-border text-foreground"
+              m.role === "user" ? "bg-primary text-primary-foreground" : "glass-card text-foreground"
             }`}>
               {m.content}
             </div>
@@ -76,7 +76,7 @@ export default function Coach() {
         ))}
         {sending && (
           <div className="flex justify-start">
-            <div className="bg-card border border-border rounded-2xl px-4 py-2.5 text-sm text-muted-foreground">思考中...</div>
+            <div className="glass-card rounded-2xl px-4 py-2.5 text-sm text-muted-foreground">思考中...</div>
           </div>
         )}
         <div ref={bottomRef} />
@@ -88,7 +88,7 @@ export default function Coach() {
             <button
               key={q}
               onClick={() => handleSend(q)}
-              className="text-xs bg-card border border-border text-muted-foreground px-3 py-1.5 rounded-full"
+              className="text-xs glass-card text-muted-foreground px-3 py-1.5 rounded-full"
             >
               {q}
             </button>
@@ -96,14 +96,15 @@ export default function Coach() {
         </div>
       )}
 
-      <div className="px-5 pb-24 pt-2 border-t border-border bg-background/80 backdrop-blur">
+      <div className="px-5 pb-24 pt-2" style={{ background: "rgba(8,12,24,0.80)", backdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex gap-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="问问教练..."
-            className="flex-1 h-11 rounded-full border border-border bg-card text-foreground px-4 text-sm outline-none focus:border-primary"
+            className="flex-1 h-11 rounded-full px-4 text-sm outline-none text-foreground placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
           />
           <button onClick={() => handleSend()} disabled={sending} className="w-11 h-11 rounded-full bg-primary flex items-center justify-center shrink-0">
             <Send className="w-4 h-4 text-primary-foreground" />

@@ -99,7 +99,7 @@ export default function FoodAdd() {
   };
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
+    <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => (mode || estimate ? (setMode(null), setEstimate(null)) : navigate(-1))}>
           <ChevronLeft className="w-6 h-6 text-foreground" />
@@ -113,9 +113,9 @@ export default function FoodAdd() {
             <button
               key={key}
               onClick={() => (key === "saved" ? (loadSavedMeals(), setMode(key)) : setMode(key))}
-              className="flex items-center gap-4 bg-card rounded-2xl p-4 border border-border"
+              className="flex items-center gap-4 glass-card rounded-2xl p-4"
             >
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: "rgba(58,134,255,0.12)" }}>
                 <Icon className="w-5 h-5 text-primary" />
               </div>
               <span className="font-medium text-foreground">{label}</span>
@@ -128,11 +128,11 @@ export default function FoodAdd() {
         <div>
           {analyzing ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+              <div className="w-8 h-8 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
               <p className="text-sm text-muted-foreground">AI 正在识别中...</p>
             </div>
           ) : (
-            <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-primary/20 rounded-2xl py-16 cursor-pointer">
+            <label className="flex flex-col items-center justify-center gap-3 rounded-2xl py-16 cursor-pointer" style={{ border: "2px dashed rgba(58,134,255,0.2)" }}>
               <Camera className="w-8 h-8 text-primary" />
               <span className="text-sm font-medium text-muted-foreground">点击上传食物照片</span>
               <input
@@ -153,6 +153,7 @@ export default function FoodAdd() {
             placeholder="例如：我吃了两个鸡腿，一碗米饭，一杯蛋白粉"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
+            className="bg-transparent border-white/10"
           />
           <Button onClick={analyzeText} disabled={analyzing || !textInput.trim()} className="w-full py-6 rounded-2xl">
             {analyzing ? "AI 分析中..." : "开始分析"}
@@ -178,7 +179,7 @@ export default function FoodAdd() {
                 coaching_note: "",
                 image_url: "",
               })}
-              className="w-full flex items-center justify-between bg-card rounded-2xl p-4 border border-border text-left"
+              className="w-full flex items-center justify-between glass-card rounded-2xl p-4 text-left"
             >
               <span className="font-medium text-foreground text-sm">{meal.name}</span>
               <span className="text-xs text-muted-foreground">{Math.round(meal.calories)} kcal</span>

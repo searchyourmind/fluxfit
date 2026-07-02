@@ -120,47 +120,47 @@ export default function Checkin() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="px-5 pt-8 pb-10 min-h-screen bg-background">
+    <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
         <h1 className="text-lg font-heading font-bold text-foreground">每周检查</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">平均每日热量</p>
-          <p className="text-xl font-bold text-foreground">{result.avgCalories} kcal</p>
+          <p className="text-xl font-bold text-foreground font-heading">{result.avgCalories} kcal</p>
         </div>
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">平均蛋白质</p>
-          <p className="text-xl font-bold text-foreground">{result.avgProtein} g</p>
+          <p className="text-xl font-bold text-foreground font-heading">{result.avgProtein} g</p>
         </div>
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">体重变化</p>
-          <p className="text-xl font-bold text-foreground">{result.weightChange} kg</p>
+          <p className="text-xl font-bold text-foreground font-heading">{result.weightChange} kg</p>
         </div>
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">训练次数</p>
-          <p className="text-xl font-bold text-foreground">{result.trainingSessions}</p>
+          <p className="text-xl font-bold text-foreground font-heading">{result.trainingSessions}</p>
         </div>
       </div>
 
-      <div className="bg-primary/10 rounded-2xl p-4 mb-4 space-y-2">
+      <div className="glass-card rounded-[20px] p-4 mb-4 space-y-2" style={{ background: "rgba(58,134,255,0.08)" }}>
         {result.notes.map((n, i) => (
           <p key={i} className="text-sm text-primary leading-relaxed">• {n}</p>
         ))}
       </div>
 
-      <div className="bg-card rounded-2xl p-4 border border-border mb-6 flex items-center justify-between">
+      <div className="glass-card rounded-[20px] p-4 mb-6 flex items-center justify-between">
         <span className="text-sm text-muted-foreground">建议调整</span>
-        <span className={`text-lg font-bold ${result.adjustment > 0 ? "text-primary" : result.adjustment < 0 ? "text-destructive" : "text-foreground"}`}>
+        <span className={`text-lg font-bold font-heading ${result.adjustment > 0 ? "text-primary" : result.adjustment < 0 ? "text-destructive" : "text-foreground"}`}>
           {result.adjustment >= 0 ? "+" : ""}{result.adjustment} kcal
         </span>
       </div>

@@ -53,8 +53,8 @@ export default function Strategy() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -68,58 +68,58 @@ export default function Strategy() {
         <h1 className="text-lg font-heading font-bold text-foreground">营养策略</h1>
       </div>
 
-      <div className="bg-card rounded-3xl p-5 border border-border mb-4">
-        <p className="text-xs text-muted-foreground mb-1">当前目标</p>
-        <p className="text-xl font-bold text-foreground mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
+      <div className="glass-card rounded-[20px] p-5 mb-4">
+        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-1">当前目标</p>
+        <p className="text-xl font-bold text-foreground font-heading mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-xs text-muted-foreground">目标热量</p>
-            <p className="text-lg font-bold text-foreground">{target?.calories ?? "-"} kcal</p>
+            <p className="text-lg font-bold text-foreground font-heading">{target?.calories ?? "-"} kcal</p>
           </div>
           <div>
             <p className="text-xs text-muted-foreground">目标节奏</p>
-            <p className="text-lg font-bold text-foreground">{profile ? PACE_LABELS[profile.target_pace] : "-"}</p>
+            <p className="text-lg font-bold text-foreground font-heading">{profile ? PACE_LABELS[profile.target_pace] : "-"}</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-card rounded-3xl p-5 border border-border mb-4">
-        <p className="text-xs text-muted-foreground mb-3">宏量营养素目标</p>
+      <div className="glass-card rounded-[20px] p-5 mb-4">
+        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">宏量营养素目标</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
-            <p className="text-lg font-bold text-protein">{target?.protein_g ?? "-"}g</p>
+            <p className="text-lg font-bold text-protein font-heading">{target?.protein_g ?? "-"}g</p>
             <p className="text-[11px] text-muted-foreground">蛋白质</p>
           </div>
           <div>
-            <p className="text-lg font-bold text-carbs">{target?.carbs_g ?? "-"}g</p>
+            <p className="text-lg font-bold text-carbs font-heading">{target?.carbs_g ?? "-"}g</p>
             <p className="text-[11px] text-muted-foreground">碳水</p>
           </div>
           <div>
-            <p className="text-lg font-bold text-fat">{target?.fat_g ?? "-"}g</p>
+            <p className="text-lg font-bold text-fat font-heading">{target?.fat_g ?? "-"}g</p>
             <p className="text-[11px] text-muted-foreground">脂肪</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">预估消耗</p>
-          <p className="text-lg font-bold text-foreground">
+          <p className="text-lg font-bold text-foreground font-heading">
             {expenditure ? `${expenditure.estimated_expenditure} kcal` : "数据不足"}
           </p>
         </div>
-        <div className="bg-card rounded-2xl p-4 border border-border">
+        <div className="glass-card rounded-[20px] p-4">
           <p className="text-xs text-muted-foreground mb-1">目标变化速度</p>
-          <p className="text-lg font-bold text-foreground">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
+          <p className="text-lg font-bold text-foreground font-heading">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
         </div>
       </div>
 
-      <div className="bg-card rounded-2xl p-4 border border-border mb-4 flex items-center justify-between">
+      <div className="glass-card rounded-[20px] p-4 mb-4 flex items-center justify-between">
         <span className="text-sm text-muted-foreground">本周记录依从度</span>
-        <span className="text-lg font-bold text-primary">{adherence}%</span>
+        <span className="text-lg font-bold text-primary font-heading">{adherence}%</span>
       </div>
 
-      <div className="bg-card rounded-2xl p-4 border border-border flex items-center justify-between">
+      <div className="glass-card rounded-[20px] p-4 flex items-center justify-between">
         <span className="text-sm text-muted-foreground">下次检查时间</span>
         <span className="text-sm font-semibold text-foreground">{nextCheckin}</span>
       </div>
