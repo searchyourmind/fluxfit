@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Camera, Scale, Dumbbell } from "lucide-react";
 import MacroBar from "@/components/dashboard/MacroBar";
 import FoodLogItem from "@/components/dashboard/FoodLogItem";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [target, setTarget] = useState(null);
   const [todayLogs, setTodayLogs] = useState([]);
@@ -13,6 +14,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     const load = async () => {
+      const profiles = await base44.entities.Profile.filter({}, "-created_date", 1);
+      if (!profiles[0]) {
+        navigate("/onboarding", { replace: true });
+        return;
+      }
       const [targets, logs, weights] = await Promise.all([
         base44.entities.DailyTarget.filter({ active: true }, "-created_date", 1),
         base44.entities.FoodLog.filter({}, "-created_date", 100),
