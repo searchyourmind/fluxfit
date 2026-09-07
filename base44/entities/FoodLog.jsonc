@@ -46,7 +46,9 @@
     "calories"
   ],
   "rls": {
-    "create": true,
+    "create": {
+      "created_by": "{{user.email}}"
+    },
     "read": {
       "created_by": "{{user.email}}"
     },
