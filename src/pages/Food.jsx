@@ -4,10 +4,10 @@ import { Copy, Trash2, ChevronLeft, BookmarkPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const MEAL_TYPES = [
-  { value: "breakfast", label: "早餐" },
-  { value: "lunch", label: "午餐" },
-  { value: "dinner", label: "晚餐" },
-  { value: "snack", label: "加餐" },
+  { value: "breakfast", label: "Breakfast" },
+  { value: "lunch", label: "Lunch" },
+  { value: "dinner", label: "Dinner" },
+  { value: "snack", label: "Snack" },
 ];
 
 export default function Food() {
@@ -63,11 +63,11 @@ export default function Food() {
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
-        <h1 className="text-lg font-heading font-bold text-foreground">饮食记录</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Food Log</h1>
       </div>
 
       {Object.keys(groupedByDate).length === 0 && (
-        <p className="text-sm text-muted-foreground text-center py-10">还没有饮食记录</p>
+        <p className="text-sm text-muted-foreground text-center py-10">No food entries yet</p>
       )}
 
       {Object.entries(groupedByDate).map(([date, dayLogs]) => (
@@ -92,17 +92,17 @@ export default function Food() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-foreground truncate">{log.description}</p>
                         <p className="text-xs text-muted-foreground mt-0.5">
-                          {Math.round(log.calories)} kcal · 蛋白 {Math.round(log.protein_g || 0)}g · 碳水 {Math.round(log.carbs_g || 0)}g · 脂肪 {Math.round(log.fat_g || 0)}g
+                          {Math.round(log.calories)} kcal · Protein {Math.round(log.protein_g || 0)}g · Carbs {Math.round(log.carbs_g || 0)}g · Fat {Math.round(log.fat_g || 0)}g
                         </p>
                       </div>
                       <div className="flex gap-1 shrink-0">
-                        <button onClick={() => handleSaveAsMeal(log)} title="存为常用餐食" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
+                        <button onClick={() => handleSaveAsMeal(log)} title="Save as meal" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <BookmarkPlus className="w-3.5 h-3.5" />
                         </button>
-                        <button onClick={() => handleCopyToToday(log)} title="复制到今天" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
+                        <button onClick={() => handleCopyToToday(log)} title="Copy to today" className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <Copy className="w-3.5 h-3.5" />
                         </button>
-                        <button onClick={() => handleDelete(log.id)} title="删除" className="w-8 h-8 flex items-center justify-center rounded-lg text-destructive" style={{ background: "rgba(255,255,255,0.06)" }}>
+                        <button onClick={() => handleDelete(log.id)} title="Delete" className="w-8 h-8 flex items-center justify-center rounded-lg text-destructive" style={{ background: "rgba(255,255,255,0.06)" }}>
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>

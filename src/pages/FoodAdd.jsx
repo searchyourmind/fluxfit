@@ -7,10 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import EstimateResult from "@/components/food/EstimateResult";
 
 const MODES = [
-  { key: "photo", label: "拍照识别", icon: Camera },
-  { key: "text", label: "文字记录", icon: Type },
-  { key: "manual", label: "手动添加", icon: PenLine },
-  { key: "saved", label: "常用餐食", icon: BookmarkCheck },
+  { key: "photo", label: "Photo Recognition", icon: Camera },
+  { key: "text", label: "Text Entry", icon: Type },
+  { key: "manual", label: "Manual Entry", icon: PenLine },
+  { key: "saved", label: "Saved Meals", icon: BookmarkCheck },
 ];
 
 const EMPTY_ESTIMATE = { description: "", calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0, coaching_note: "", image_url: "" };
@@ -34,7 +34,7 @@ export default function FoodAdd() {
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     const result = await base44.integrations.Core.InvokeLLM({
       prompt:
-        "你是一名营养师。请分析这张食物照片（可能是中餐、外卖、奶茶、火锅、寿司、蛋白粉或家常菜），估算食物名称、总热量范围、蛋白质、碳水、脂肪含量（单位克），置信度（low/medium/high），并给出一句简短的中文教练建议。",
+        "You are a nutritionist. Analyze this food photo (it may be any cuisine, takeout, bubble tea, hotpot, sushi, protein shake, or home-cooked meal). Estimate the food name, total calories, protein, carbs, and fat content (in grams), confidence level (low/medium/high), and provide a brief coaching tip in English.",
       file_urls: [file_url],
       response_json_schema: {
         type: "object",
@@ -65,7 +65,7 @@ export default function FoodAdd() {
   const analyzeText = async () => {
     setAnalyzing(true);
     const result = await base44.integrations.Core.InvokeLLM({
-      prompt: `你是一名营养师。请分析以下饮食描述（可能包含中餐、外卖、奶茶、火锅、寿司、蛋白粉等），估算总热量、蛋白质、碳水、脂肪含量（单位克），置信度（low/medium/high），并给出一句简短的中文教练建议。\n\n饮食描述："${textInput}"`,
+      prompt: `You are a nutritionist. Analyze the following food description (it may include any cuisine, takeout, bubble tea, hotpot, sushi, protein shakes, etc.). Estimate total calories, protein, carbs, and fat content (in grams), confidence level (low/medium/high), and provide a brief coaching tip in English.\n\nFood description: "${textInput}"`,
       response_json_schema: {
         type: "object",
         properties: {
@@ -104,7 +104,7 @@ export default function FoodAdd() {
         <button onClick={() => (mode || estimate ? (setMode(null), setEstimate(null)) : navigate(-1))}>
           <ChevronLeft className="w-6 h-6 text-foreground" />
         </button>
-        <h1 className="text-lg font-heading font-bold text-foreground">添加食物</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Add Food</h1>
       </div>
 
       {!mode && !estimate && (
@@ -129,12 +129,12 @@ export default function FoodAdd() {
           {analyzing ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
               <div className="w-8 h-8 border-4 border-white/10 border-t-primary rounded-full animate-spin" />
-              <p className="text-sm text-muted-foreground">AI 正在识别中...</p>
+              <p className="text-sm text-muted-foreground">AI is analyzing...</p>
             </div>
           ) : (
             <label className="flex flex-col items-center justify-center gap-3 rounded-2xl py-16 cursor-pointer" style={{ border: "2px dashed rgba(58,134,255,0.2)" }}>
               <Camera className="w-8 h-8 text-primary" />
-              <span className="text-sm font-medium text-muted-foreground">点击上传食物照片</span>
+              <span className="text-sm font-medium text-muted-foreground">Tap to upload a food photo</span>
               <input
                 type="file"
                 accept="image/*"
@@ -150,13 +150,13 @@ export default function FoodAdd() {
         <div className="space-y-4">
           <Textarea
             rows={5}
-            placeholder="例如：我吃了两个鸡腿，一碗米饭，一杯蛋白粉"
+            placeholder="e.g., I had two chicken thighs, a bowl of rice, and a protein shake"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
             className="bg-transparent border-white/10"
           />
           <Button onClick={analyzeText} disabled={analyzing || !textInput.trim()} className="w-full py-6 rounded-2xl">
-            {analyzing ? "AI 分析中..." : "开始分析"}
+            {analyzing ? "AI analyzing..." : "Analyze"}
           </Button>
         </div>
       )}
@@ -165,7 +165,7 @@ export default function FoodAdd() {
 
       {mode === "saved" && !estimate && (
         <div className="space-y-2">
-          {savedMeals.length === 0 && <p className="text-sm text-muted-foreground text-center py-10">还没有常用餐食，先在饮食记录里保存一个吧</p>}
+          {savedMeals.length === 0 && <p className="text-sm text-muted-foreground text-center py-10">No saved meals yet — save one from your food log first</p>}
           {savedMeals.map((meal) => (
             <button
               key={meal.id}
@@ -193,7 +193,7 @@ export default function FoodAdd() {
           onClick={() => setEstimate({ ...EMPTY_ESTIMATE })}
           className="w-full py-6 rounded-2xl"
         >
-          填写详情
+          Fill in Details
         </Button>
       )}
 

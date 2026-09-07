@@ -60,18 +60,18 @@ export default function Dashboard() {
 
   const proteinRemaining = Math.max(0, Math.round((target?.protein_g || 0) - protein));
   const summary = target
-    ? `还剩 ${Math.round(remaining)} kcal${proteinRemaining > 0 ? `，蛋白质还差 ${proteinRemaining}g` : "，蛋白质已达标"}`
-    : "设置目标后即可查看每日概览";
+    ? `${Math.round(remaining)} kcal left${proteinRemaining > 0 ? `, ${proteinRemaining}g protein to go` : ", protein goal met"}`
+    : "Set your targets to see your daily overview";
 
   return (
     <div className="px-5 pt-8 pb-4">
-      <h1 className="text-xl font-heading font-bold text-foreground mb-0.5">今天</h1>
+      <h1 className="text-xl font-heading font-bold text-foreground mb-0.5">Today</h1>
       <p className="text-sm text-primary/80 mb-5">{summary}</p>
 
       {/* Calorie Rings */}
       <div className="glass-card rounded-[20px] p-5 mb-4">
         <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase">
-          每日热量目标 · {target?.calories?.toLocaleString() || 0} KCAL
+          Daily Calorie Target · {target?.calories?.toLocaleString() || 0} KCAL
         </p>
         <CalorieRings consumed={consumed} remaining={remaining} target={target?.calories || 1} />
       </div>
@@ -79,12 +79,12 @@ export default function Dashboard() {
       {/* Macro Balance */}
       <div className="glass-card rounded-[20px] p-5 mb-4">
         <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">
-          宏量营养素
+          Macronutrients
         </p>
         <div className="space-y-2.5">
-          <MacroBar label="碳水" current={carbs} target={target?.carbs_g || 0} color="#22C55E" />
-          <MacroBar label="脂肪" current={fat} target={target?.fat_g || 0} color="#F59E0B" />
-          <MacroBar label="蛋白质" current={protein} target={target?.protein_g || 0} color="#EF4444" />
+          <MacroBar label="Carbs" current={carbs} target={target?.carbs_g || 0} color="#22C55E" />
+          <MacroBar label="Fat" current={fat} target={target?.fat_g || 0} color="#F59E0B" />
+          <MacroBar label="Protein" current={protein} target={target?.protein_g || 0} color="#EF4444" />
         </div>
       </div>
 
@@ -94,35 +94,35 @@ export default function Dashboard() {
       {/* Weight */}
       <div className="glass-card rounded-[20px] p-5 mb-4 flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-1">最新体重</p>
-          <p className="text-2xl font-bold text-foreground font-heading">{latestWeight ? `${latestWeight.weight_kg} kg` : "未记录"}</p>
+          <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-1">Latest Weight</p>
+          <p className="text-2xl font-bold text-foreground font-heading">{latestWeight ? `${latestWeight.weight_kg} kg` : "Not logged"}</p>
         </div>
-        <Link to="/weight" className="text-xs font-semibold text-primary">查看趋势 →</Link>
+        <Link to="/weight" className="text-xs font-semibold text-primary">View Trend →</Link>
       </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-3 gap-3 mb-6">
         <Link to="/food/add" className="flex flex-col items-center gap-1.5 glass-card rounded-2xl py-4">
           <Camera className="w-5 h-5 text-primary" />
-          <span className="text-[11px] font-medium text-muted-foreground">记录食物</span>
+          <span className="text-[11px] font-medium text-muted-foreground">Log Food</span>
         </Link>
         <Link to="/weight" className="flex flex-col items-center gap-1.5 glass-card rounded-2xl py-4">
           <Scale className="w-5 h-5 text-primary" />
-          <span className="text-[11px] font-medium text-muted-foreground">记录体重</span>
+          <span className="text-[11px] font-medium text-muted-foreground">Log Weight</span>
         </Link>
         <Link to="/training" className="flex flex-col items-center gap-1.5 glass-card rounded-2xl py-4">
           <Dumbbell className="w-5 h-5 text-primary" />
-          <span className="text-[11px] font-medium text-muted-foreground">记录训练</span>
+          <span className="text-[11px] font-medium text-muted-foreground">Log Training</span>
         </Link>
       </div>
 
       {/* Food Log */}
       <div className="flex items-center justify-between mb-3">
-        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase">今日饮食记录</p>
-        <Link to="/food" className="text-xs font-semibold text-primary">查看全部 →</Link>
+        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase">Today's Food Log</p>
+        <Link to="/food" className="text-xs font-semibold text-primary">View All →</Link>
       </div>
       <div className="space-y-2">
-        {todayLogs.length === 0 && <p className="text-sm text-muted-foreground text-center py-6">还没有记录，去添加第一餐吧</p>}
+        {todayLogs.length === 0 && <p className="text-sm text-muted-foreground text-center py-6">No entries yet — add your first meal</p>}
         {todayLogs.map((log) => (
           <FoodLogItem key={log.id} log={log} />
         ))}

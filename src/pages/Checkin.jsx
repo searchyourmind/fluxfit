@@ -53,31 +53,31 @@ export default function Checkin() {
       if (goalType === "fat_loss") {
         if (twoWeekChange !== null && twoWeekChange > -0.2) {
           adjustment -= 150;
-          notes.push("过去两周体重下降缓慢，已下调每日目标 150 kcal。");
+          notes.push("Weight loss has been slow over the past two weeks — daily target reduced by 150 kcal.");
         } else if (weightChange < -1) {
           adjustment += 125;
-          notes.push("本周体重下降过快，已上调每日目标 125 kcal 以保护肌肉量。");
+          notes.push("Weight dropped too fast this week — daily target increased by 125 kcal to preserve muscle.");
         } else {
-          notes.push("体重下降节奏良好，维持当前目标。");
+          notes.push("Weight loss pace is on track — maintaining current target.");
         }
       } else if (goalType === "muscle_gain") {
         if (weightChange < 0.1) {
           adjustment += 150;
-          notes.push("体重增长不足，已上调每日目标 150 kcal。");
+          notes.push("Weight gain is insufficient — daily target increased by 150 kcal.");
         } else {
-          notes.push("增重进度良好，维持当前目标。");
+          notes.push("Weight gain progress is on track — maintaining current target.");
         }
       } else {
-        notes.push("维持阶段，目标保持不变。");
+        notes.push("Maintenance phase — target unchanged.");
       }
 
       const proteinTargetPerKg = 1.6;
       if (prof && avgProtein < prof.current_weight_kg * proteinTargetPerKg) {
-        notes.push("本周蛋白质摄入偏低，建议增加瘦肉、蛋白粉或豆制品摄入。");
+        notes.push("Protein intake is low this week — consider adding more lean meat, protein powder, or legumes.");
       }
 
       if (trainingSessions < (prof?.training_frequency || 3)) {
-        notes.push("本周训练次数低于目标，训练日建议增加碳水摄入以提升表现。");
+        notes.push("Training sessions are below target this week — consider adding more carbs on training days to boost performance.");
       }
 
       setResult({
@@ -103,7 +103,7 @@ export default function Checkin() {
       carbs_g: target.carbs_g,
       fat_g: target.fat_g,
       active: true,
-      reason: `每周检查调整 ${result.adjustment >= 0 ? "+" : ""}${result.adjustment} kcal`,
+      reason: `Weekly check-in adjustment ${result.adjustment >= 0 ? "+" : ""}${result.adjustment} kcal`,
     });
     await base44.entities.WeeklyCheckin.create({
       week_start: new Date().toISOString().split("T")[0],
@@ -130,24 +130,24 @@ export default function Checkin() {
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
-        <h1 className="text-lg font-heading font-bold text-foreground">每周检查</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Weekly Check-in</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">平均每日热量</p>
+          <p className="text-xs text-muted-foreground mb-1">Avg Daily Calories</p>
           <p className="text-xl font-bold text-foreground font-heading">{result.avgCalories} kcal</p>
         </div>
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">平均蛋白质</p>
+          <p className="text-xs text-muted-foreground mb-1">Avg Protein</p>
           <p className="text-xl font-bold text-foreground font-heading">{result.avgProtein} g</p>
         </div>
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">体重变化</p>
+          <p className="text-xs text-muted-foreground mb-1">Weight Change</p>
           <p className="text-xl font-bold text-foreground font-heading">{result.weightChange} kg</p>
         </div>
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">训练次数</p>
+          <p className="text-xs text-muted-foreground mb-1">Training Sessions</p>
           <p className="text-xl font-bold text-foreground font-heading">{result.trainingSessions}</p>
         </div>
       </div>
@@ -159,14 +159,14 @@ export default function Checkin() {
       </div>
 
       <div className="glass-card rounded-[20px] p-4 mb-6 flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">建议调整</span>
+        <span className="text-sm text-muted-foreground">Recommended Adjustment</span>
         <span className={`text-lg font-bold font-heading ${result.adjustment > 0 ? "text-primary" : result.adjustment < 0 ? "text-destructive" : "text-foreground"}`}>
           {result.adjustment >= 0 ? "+" : ""}{result.adjustment} kcal
         </span>
       </div>
 
       <Button onClick={handleApply} disabled={applying} className="w-full py-6 rounded-2xl">
-        {applying ? "应用中..." : "确认并应用新目标"}
+        {applying ? "Applying..." : "Confirm & Apply New Target"}
       </Button>
     </div>
   );

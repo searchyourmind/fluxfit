@@ -40,26 +40,26 @@ export default function Weight() {
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
-        <h1 className="text-lg font-heading font-bold text-foreground">体重记录</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Weight Log</h1>
       </div>
 
       <form onSubmit={handleSave} className="flex gap-2 mb-6">
-        <Input type="number" step="0.1" placeholder="今日体重 (kg)" value={weight} onChange={(e) => setWeight(e.target.value)} required className="bg-transparent border-white/10 text-foreground" />
-        <Button type="submit" disabled={saving} className="shrink-0">保存</Button>
+        <Input type="number" step="0.1" placeholder="Today's weight (kg)" value={weight} onChange={(e) => setWeight(e.target.value)} required className="bg-transparent border-white/10 text-foreground" />
+        <Button type="submit" disabled={saving} className="shrink-0">Save</Button>
       </form>
 
       <div className="grid grid-cols-3 gap-3 mb-6">
         <div className="glass-card rounded-[20px] p-3 text-center">
           <p className="text-lg font-bold text-foreground font-heading">{latest ? latest.weight_kg : "-"}</p>
-          <p className="text-[11px] text-muted-foreground mt-0.5">最新体重</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">Latest</p>
         </div>
         <div className="glass-card rounded-[20px] p-3 text-center">
           <p className="text-lg font-bold text-foreground font-heading">{avg7 ?? "-"}</p>
-          <p className="text-[11px] text-muted-foreground mt-0.5">7天平均</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">7-Day Avg</p>
         </div>
         <div className="glass-card rounded-[20px] p-3 text-center">
           <p className={`text-lg font-bold font-heading ${trend < 0 ? "text-primary" : "text-foreground"}`}>{trend ?? "-"}</p>
-          <p className="text-[11px] text-muted-foreground mt-0.5">14天变化</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">14-Day Change</p>
         </div>
       </div>
 

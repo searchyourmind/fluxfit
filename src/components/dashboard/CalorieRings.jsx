@@ -27,7 +27,7 @@ export default function CalorieRings({ consumed, remaining, target }) {
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-2xl font-bold text-foreground font-heading">{Math.round(consumed).toLocaleString()}</span>
           <span className="text-[10px] text-muted-foreground">kcal</span>
-          <span className="text-[10px] text-muted-foreground mt-0.5">已摄入</span>
+          <span className="text-[10px] text-muted-foreground mt-0.5">Consumed</span>
         </div>
       </div>
       <div className="relative">
@@ -41,7 +41,7 @@ export default function CalorieRings({ consumed, remaining, target }) {
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-[10px] text-muted-foreground">剩余</span>
+          <span className="text-[10px] text-muted-foreground">Remaining</span>
           <span className="text-lg font-bold text-foreground font-heading">{Math.round(remaining)}</span>
           <span className="text-[10px] text-muted-foreground">kcal</span>
         </div>

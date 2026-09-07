@@ -2,11 +2,11 @@ import { Outlet, Link, useLocation } from "react-router-dom";
 import { Flame, UtensilsCrossed, Scale, Target, MessageCircle } from "lucide-react";
 
 const NAV_ITEMS = [
-  { path: "/dashboard", label: "今天", icon: Flame },
-  { path: "/food", label: "饮食", icon: UtensilsCrossed },
-  { path: "/weight", label: "体重", icon: Scale },
-  { path: "/strategy", label: "策略", icon: Target },
-  { path: "/coach", label: "教练", icon: MessageCircle },
+  { path: "/dashboard", label: "Today", icon: Flame },
+  { path: "/food", label: "Food", icon: UtensilsCrossed },
+  { path: "/weight", label: "Weight", icon: Scale },
+  { path: "/strategy", label: "Strategy", icon: Target },
+  { path: "/coach", label: "Coach", icon: MessageCircle },
 ];
 
 export default function AppLayout() {

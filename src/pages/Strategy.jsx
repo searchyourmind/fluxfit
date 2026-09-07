@@ -3,8 +3,8 @@ import { base44 } from "@/api/base44Client";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const GOAL_LABELS = { fat_loss: "减脂", muscle_gain: "增肌", maintenance: "维持" };
-const PACE_LABELS = { slow: "缓慢", moderate: "适中", aggressive: "激进" };
+const GOAL_LABELS = { fat_loss: "Fat Loss", muscle_gain: "Muscle Gain", maintenance: "Maintenance" };
+const PACE_LABELS = { slow: "Slow", moderate: "Moderate", aggressive: "Aggressive" };
 const RATE_PER_PACE = {
   fat_loss: { slow: -0.25, moderate: -0.5, aggressive: -0.75 },
   muscle_gain: { slow: 0.1, moderate: 0.25, aggressive: 0.4 },
@@ -65,62 +65,62 @@ export default function Strategy() {
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
-        <h1 className="text-lg font-heading font-bold text-foreground">营养策略</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Nutrition Strategy</h1>
       </div>
 
       <div className="glass-card rounded-[20px] p-5 mb-4">
-        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-1">当前目标</p>
+        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-1">Current Goal</p>
         <p className="text-xl font-bold text-foreground font-heading mb-4">{profile ? GOAL_LABELS[profile.goal_type] : "-"}</p>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-xs text-muted-foreground">目标热量</p>
+            <p className="text-xs text-muted-foreground">Target Calories</p>
             <p className="text-lg font-bold text-foreground font-heading">{target?.calories ?? "-"} kcal</p>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground">目标节奏</p>
+            <p className="text-xs text-muted-foreground">Target Pace</p>
             <p className="text-lg font-bold text-foreground font-heading">{profile ? PACE_LABELS[profile.target_pace] : "-"}</p>
           </div>
         </div>
       </div>
 
       <div className="glass-card rounded-[20px] p-5 mb-4">
-        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">宏量营养素目标</p>
+        <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">Macro Targets</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
             <p className="text-lg font-bold text-protein font-heading">{target?.protein_g ?? "-"}g</p>
-            <p className="text-[11px] text-muted-foreground">蛋白质</p>
+            <p className="text-[11px] text-muted-foreground">Protein</p>
           </div>
           <div>
             <p className="text-lg font-bold text-carbs font-heading">{target?.carbs_g ?? "-"}g</p>
-            <p className="text-[11px] text-muted-foreground">碳水</p>
+            <p className="text-[11px] text-muted-foreground">Carbs</p>
           </div>
           <div>
             <p className="text-lg font-bold text-fat font-heading">{target?.fat_g ?? "-"}g</p>
-            <p className="text-[11px] text-muted-foreground">脂肪</p>
+            <p className="text-[11px] text-muted-foreground">Fat</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">预估消耗</p>
+          <p className="text-xs text-muted-foreground mb-1">Estimated Expenditure</p>
           <p className="text-lg font-bold text-foreground font-heading">
-            {expenditure ? `${expenditure.estimated_expenditure} kcal` : "数据不足"}
+            {expenditure ? `${expenditure.estimated_expenditure} kcal` : "Insufficient data"}
           </p>
         </div>
         <div className="glass-card rounded-[20px] p-4">
-          <p className="text-xs text-muted-foreground mb-1">目标变化速度</p>
-          <p className="text-lg font-bold text-foreground font-heading">{targetRate >= 0 ? "+" : ""}{targetRate} kg/周</p>
+          <p className="text-xs text-muted-foreground mb-1">Target Rate of Change</p>
+          <p className="text-lg font-bold text-foreground font-heading">{targetRate >= 0 ? "+" : ""}{targetRate} kg/week</p>
         </div>
       </div>
 
       <div className="glass-card rounded-[20px] p-4 mb-4 flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">本周记录依从度</span>
+        <span className="text-sm text-muted-foreground">Weekly Adherence</span>
         <span className="text-lg font-bold text-primary font-heading">{adherence}%</span>
       </div>
 
       <div className="glass-card rounded-[20px] p-4 flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">下次检查时间</span>
+        <span className="text-sm text-muted-foreground">Next Check-in</span>
         <span className="text-sm font-semibold text-foreground">{nextCheckin}</span>
       </div>
     </div>

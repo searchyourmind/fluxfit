@@ -7,27 +7,27 @@ import { Label } from "@/components/ui/label";
 import { calculateTargets } from "@/lib/nutrition";
 
 const GOAL_TYPES = [
-  { value: "fat_loss", label: "减脂" },
-  { value: "muscle_gain", label: "增肌" },
-  { value: "maintenance", label: "维持" },
+  { value: "fat_loss", label: "Fat Loss" },
+  { value: "muscle_gain", label: "Muscle Gain" },
+  { value: "maintenance", label: "Maintenance" },
 ];
 const ACTIVITY_LEVELS = [
-  { value: "sedentary", label: "久坐不动" },
-  { value: "light", label: "轻度活动" },
-  { value: "moderate", label: "中度活动" },
-  { value: "active", label: "积极活动" },
-  { value: "very_active", label: "非常活跃" },
+  { value: "sedentary", label: "Sedentary" },
+  { value: "light", label: "Lightly Active" },
+  { value: "moderate", label: "Moderately Active" },
+  { value: "active", label: "Very Active" },
+  { value: "very_active", label: "Extra Active" },
 ];
 const PACES = [
-  { value: "slow", label: "缓慢" },
-  { value: "moderate", label: "适中" },
-  { value: "aggressive", label: "激进" },
+  { value: "slow", label: "Slow" },
+  { value: "moderate", label: "Moderate" },
+  { value: "aggressive", label: "Aggressive" },
 ];
 const MACRO_PREFS = [
-  { value: "balanced", label: "均衡" },
-  { value: "higher_carb", label: "高碳水" },
-  { value: "higher_fat", label: "高脂肪" },
-  { value: "high_protein", label: "高蛋白" },
+  { value: "balanced", label: "Balanced" },
+  { value: "higher_carb", label: "Higher Carb" },
+  { value: "higher_fat", label: "Higher Fat" },
+  { value: "high_protein", label: "High Protein" },
 ];
 
 export default function Onboarding() {
@@ -68,7 +68,7 @@ export default function Onboarding() {
     };
     await base44.entities.Profile.create(profileData);
     const targets = calculateTargets(profileData);
-    await base44.entities.DailyTarget.create({ ...targets, active: true, reason: "初始目标" });
+    await base44.entities.DailyTarget.create({ ...targets, active: true, reason: "Initial target" });
     await base44.entities.WeightLog.create({
       weight_kg: profileData.current_weight_kg,
       log_date: new Date().toISOString().split("T")[0],
@@ -79,47 +79,47 @@ export default function Onboarding() {
   return (
     <div className="min-h-screen bg-background px-6 py-10">
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-heading font-bold text-foreground mb-1">完善你的资料</h1>
-        <p className="text-muted-foreground text-sm mb-8">帮助我们生成你的个性化目标</p>
+        <h1 className="text-2xl font-heading font-bold text-foreground mb-1">Complete Your Profile</h1>
+        <p className="text-muted-foreground text-sm mb-8">Help us generate your personalized targets</p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <Label className="text-muted-foreground">姓名</Label>
+            <Label className="text-muted-foreground">Name</Label>
             <Input required value={form.name} onChange={(e) => update("name", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label className="text-muted-foreground">年龄</Label>
+              <Label className="text-muted-foreground">Age</Label>
               <Input required type="number" value={form.age} onChange={(e) => update("age", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
             </div>
             <div>
-              <Label className="text-muted-foreground">性别</Label>
+              <Label className="text-muted-foreground">Sex</Label>
               <select
                 value={form.sex}
                 onChange={(e) => update("sex", e.target.value)}
                 className="mt-1.5 w-full h-10 rounded-md border border-border bg-card text-foreground px-3 text-sm"
               >
-                <option value="male">男</option>
-                <option value="female">女</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label className="text-muted-foreground">身高 (cm)</Label>
+              <Label className="text-muted-foreground">Height (cm)</Label>
               <Input required type="number" value={form.height_cm} onChange={(e) => update("height_cm", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
             </div>
             <div>
-              <Label className="text-muted-foreground">当前体重 (kg)</Label>
+              <Label className="text-muted-foreground">Current Weight (kg)</Label>
               <Input required type="number" value={form.current_weight_kg} onChange={(e) => update("current_weight_kg", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
             </div>
           </div>
           <div>
-            <Label className="text-muted-foreground">目标体重 (kg)</Label>
+            <Label className="text-muted-foreground">Target Weight (kg)</Label>
             <Input required type="number" value={form.goal_weight_kg} onChange={(e) => update("goal_weight_kg", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
           </div>
           <div>
-            <Label className="text-muted-foreground">目标类型</Label>
+            <Label className="text-muted-foreground">Goal Type</Label>
             <div className="grid grid-cols-3 gap-2 mt-1.5">
               {GOAL_TYPES.map((g) => (
                 <button
@@ -136,7 +136,7 @@ export default function Onboarding() {
             </div>
           </div>
           <div>
-            <Label className="text-muted-foreground">活动水平</Label>
+            <Label className="text-muted-foreground">Activity Level</Label>
             <select
               value={form.activity_level}
               onChange={(e) => update("activity_level", e.target.value)}
@@ -149,11 +149,11 @@ export default function Onboarding() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label className="text-muted-foreground">每周训练次数</Label>
+              <Label className="text-muted-foreground">Workouts / Week</Label>
               <Input required type="number" value={form.training_frequency} onChange={(e) => update("training_frequency", e.target.value)} className="mt-1.5 bg-card border-border text-foreground" />
             </div>
             <div>
-              <Label className="text-muted-foreground">目标节奏</Label>
+              <Label className="text-muted-foreground">Target Pace</Label>
               <select
                 value={form.target_pace}
                 onChange={(e) => update("target_pace", e.target.value)}
@@ -166,7 +166,7 @@ export default function Onboarding() {
             </div>
           </div>
           <div>
-            <Label className="text-muted-foreground">宏量营养偏好</Label>
+            <Label className="text-muted-foreground">Macro Preference</Label>
             <div className="grid grid-cols-4 gap-2 mt-1.5">
               {MACRO_PREFS.map((m) => (
                 <button
@@ -183,7 +183,7 @@ export default function Onboarding() {
             </div>
           </div>
           <Button type="submit" disabled={saving} className="w-full py-6 rounded-2xl text-base">
-            {saving ? "生成中..." : "生成我的目标"}
+            {saving ? "Generating..." : "Generate My Targets"}
           </Button>
         </form>
       </div>

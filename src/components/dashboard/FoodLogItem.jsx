@@ -1,4 +1,4 @@
-const MEAL_LABELS = { breakfast: "早餐", lunch: "午餐", dinner: "晚餐", snack: "加餐" };
+const MEAL_LABELS = { breakfast: "Breakfast", lunch: "Lunch", dinner: "Dinner", snack: "Snack" };
 
 export default function FoodLogItem({ log, onClick }) {
   return (
@@ -16,7 +16,7 @@ export default function FoodLogItem({ log, onClick }) {
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-foreground truncate">{log.description}</p>
         <p className="text-xs text-muted-foreground mt-0.5">
-          {Math.round(log.calories)} kcal · 蛋白 {Math.round(log.protein_g || 0)}g
+          {Math.round(log.calories)} kcal · Protein {Math.round(log.protein_g || 0)}g
         </p>
       </div>
     </div>

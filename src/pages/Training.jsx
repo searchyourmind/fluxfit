@@ -8,9 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 const TYPES = [
-  { value: "chest", label: "胸" }, { value: "back", label: "背" }, { value: "legs", label: "腿" },
-  { value: "shoulders", label: "肩" }, { value: "arms", label: "手臂" }, { value: "cardio", label: "有氧" },
-  { value: "swimming", label: "游泳" }, { value: "rest", label: "休息" },
+  { value: "chest", label: "Chest" }, { value: "back", label: "Back" }, { value: "legs", label: "Legs" },
+  { value: "shoulders", label: "Shoulders" }, { value: "arms", label: "Arms" }, { value: "cardio", label: "Cardio" },
+  { value: "swimming", label: "Swimming" }, { value: "rest", label: "Rest" },
 ];
 
 export default function Training() {
@@ -41,12 +41,12 @@ export default function Training() {
     <div className="px-5 pt-8 pb-10">
       <div className="flex items-center gap-3 mb-6">
         <button onClick={() => navigate(-1)}><ChevronLeft className="w-6 h-6 text-foreground" /></button>
-        <h1 className="text-lg font-heading font-bold text-foreground">训练记录</h1>
+        <h1 className="text-lg font-heading font-bold text-foreground">Training Log</h1>
       </div>
 
       <form onSubmit={handleSave} className="glass-card rounded-[20px] p-5 space-y-4 mb-6">
         <div>
-          <Label className="text-muted-foreground">训练类型</Label>
+          <Label className="text-muted-foreground">Training Type</Label>
           <div className="grid grid-cols-4 gap-2 mt-1.5">
             {TYPES.map((t) => (
               <button
@@ -67,28 +67,28 @@ export default function Training() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label className="text-muted-foreground">时长 (分钟)</Label>
+            <Label className="text-muted-foreground">Duration (min)</Label>
             <Input type="number" value={form.duration_min} onChange={(e) => setForm((f) => ({ ...f, duration_min: e.target.value }))} className="mt-1.5 bg-transparent border-white/10 text-foreground" />
           </div>
           <div>
-            <Label className="text-muted-foreground">步数</Label>
+            <Label className="text-muted-foreground">Steps</Label>
             <Input type="number" value={form.steps} onChange={(e) => setForm((f) => ({ ...f, steps: e.target.value }))} className="mt-1.5 bg-transparent border-white/10 text-foreground" />
           </div>
         </div>
         <div>
-          <Label className="text-muted-foreground">备注</Label>
+          <Label className="text-muted-foreground">Notes</Label>
           <Textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className="mt-1.5 bg-transparent border-white/10 text-foreground" />
         </div>
-        <Button type="submit" disabled={saving} className="w-full rounded-xl">保存记录</Button>
+        <Button type="submit" disabled={saving} className="w-full rounded-xl">Save Entry</Button>
       </form>
 
-      <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">最近记录</p>
+      <p className="text-[10px] font-semibold tracking-[0.15em] text-muted-foreground uppercase mb-3">Recent Entries</p>
       <div className="space-y-2">
         {logs.map((log) => (
           <div key={log.id} className="glass-card rounded-2xl p-3 flex justify-between items-center">
             <div>
               <p className="text-sm font-medium text-foreground">{TYPES.find((t) => t.value === log.training_type)?.label}</p>
-              <p className="text-xs text-muted-foreground">{log.log_date} {log.duration_min ? `· ${log.duration_min}分钟` : ""} {log.steps ? `· ${log.steps}步` : ""}</p>
+              <p className="text-xs text-muted-foreground">{log.log_date} {log.duration_min ? `· ${log.duration_min} min` : ""} {log.steps ? `· ${log.steps} steps` : ""}</p>
             </div>
           </div>
         ))}
