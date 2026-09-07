@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { Camera, TrendingUp, Sparkles, Dumbbell, MessageCircle } from "lucide-react";
 
 const FEATURES = [
-  { icon: Camera, title: "Photo Food Recognition", desc: "Snap your meal and let AI identify dishes, takeout, bubble tea, hotpot, sushi and more" },
-  { icon: Sparkles, title: "Auto Macro Estimation", desc: "Automatically calculate calories, protein, carbs and fat content" },
-  { icon: TrendingUp, title: "Track Weight Trends", desc: "Monitor weight trends and training activity at a glance" },
-  { icon: Dumbbell, title: "Dynamic Calorie Targets", desc: "Automatically adjust your daily calorie and macro targets based on real progress" },
-  { icon: MessageCircle, title: "Weekly AI Coach Review", desc: "Weekly analysis of your data with specific, actionable recommendations" },
+  { icon: Camera, title: "Photo Recognition", desc: "Snap your meal — AI identifies it instantly" },
+  { icon: Sparkles, title: "Auto Macros", desc: "Calories, protein, carbs & fat calculated for you" },
+  { icon: TrendingUp, title: "Weight Trends", desc: "Track weight and training at a glance" },
+  { icon: Dumbbell, title: "Dynamic Targets", desc: "Calorie targets adjust to your real progress" },
+  { icon: MessageCircle, title: "Weekly AI Review", desc: "Actionable insights every week" },
 ];
 
 export default function Landing() {
@@ -18,11 +18,9 @@ export default function Landing() {
             AI Nutrition Coach
           </div>
           <h1 className="text-4xl font-heading font-bold text-foreground tracking-tight mb-2">FluxFit</h1>
-          <p className="text-primary text-sm font-medium mb-4">Dynamic Calorie Tracking · Auto-Adjusted Fat Loss Plan</p>
+          <p className="text-primary text-sm font-medium mb-4">Dynamic Calorie Tracking · Auto-Adjusted Plan</p>
           <p className="text-muted-foreground text-base leading-relaxed">
-            AI helps you log meals, estimate calories, analyze weight trends,
-            <br />
-            and automatically adjust your fat loss plan.
+            AI logs your meals, estimates calories, and adjusts your plan automatically.
           </p>
         </div>
 
